@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckbf8rkan17s7"]
+
+[ext_resource type="Script" path="res://attract_background.gd" id="1_otsdp"]
+[ext_resource type="Texture2D" uid="uid://dqoby83acdhax" path="res://art/pattern_uroko.jpg" id="1_rstt3"]
+
+[node name="AttractBackground" type="ParallaxBackground"]
+script = ExtResource("1_otsdp")
+y_speed = -1.5
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(2400, 2283)
+
+[node name="CanvasGroup" type="CanvasGroup" parent="ParallaxLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
+texture = ExtResource("1_rstt3")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
+position = Vector2(800, 0)
+texture = ExtResource("1_rstt3")
+centered = false
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
+position = Vector2(0, 761)
+texture = ExtResource("1_rstt3")
+centered = false
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
+position = Vector2(800, 761)
+texture = ExtResource("1_rstt3")
+centered = false
+
+[node name="Sprite2D5" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
+position = Vector2(1600, 0)
+texture = ExtResource("1_rstt3")
+centered = false
+
+[node name="Sprite2D6" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
+position = Vector2(1600, 761)
+texture = ExtResource("1_rstt3")
+centered = false
+
+[node name="Sprite2D7" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
+position = Vector2(0, 1522)
+texture = ExtResource("1_rstt3")
+centered = false
+
+[node name="Sprite2D8" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
+position = Vector2(800, 1522)
+texture = ExtResource("1_rstt3")
+centered = false
+
+[node name="Sprite2D9" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
+position = Vector2(1600, 1522)
+texture = ExtResource("1_rstt3")
+centered = false
