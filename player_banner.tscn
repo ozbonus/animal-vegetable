@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://42hysfophalr"]
+
+[ext_resource type="Script" path="res://player_banner.gd" id="1_m7ue1"]
+[ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="3_8quur"]
+[ext_resource type="FontFile" uid="uid://dol12ydp4pjh7" path="res://font/Grandstander-Bold.ttf" id="4_a37b4"]
+[ext_resource type="FontFile" uid="uid://34xj04f3w4pu" path="res://font/Grandstander-Medium.ttf" id="5_bucro"]
+
+[node name="PlayerBanner" type="CanvasLayer"]
+script = ExtResource("1_m7ue1")
+
+[node name="BannerSprite" type="Sprite2D" parent="."]
+position = Vector2(980.5, 585.5)
+rotation = 1.5708
+texture = ExtResource("3_8quur")
+
+[node name="Player" type="Label" parent="."]
+offset_left = 865.0
+offset_top = 158.0
+offset_right = 1092.0
+offset_bottom = 408.0
+theme_override_fonts/font = ExtResource("5_bucro")
+theme_override_font_sizes/font_size = 76
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerNumber" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.511
+anchor_top = 0.5
+anchor_right = 0.511
+anchor_bottom = 0.5
+offset_left = -66.1201
+offset_top = -213.0
+offset_right = 67.8799
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("4_a37b4")
+theme_override_font_sizes/font_size = 246
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player2" type="Label" parent="."]
+offset_left = 865.0
+offset_top = 440.0
+offset_right = 1092.0
+offset_bottom = 690.0
+theme_override_fonts/font = ExtResource("5_bucro")
+theme_override_font_sizes/font_size = 76
+text = "ready!"
+horizontal_alignment = 1
+vertical_alignment = 1
