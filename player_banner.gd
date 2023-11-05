@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends CanvasGroup
 
 @export var banner: Texture2D
 @export var player_number: String

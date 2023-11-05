@@ -5,19 +5,20 @@
 [ext_resource type="FontFile" uid="uid://dol12ydp4pjh7" path="res://font/Grandstander-Bold.ttf" id="4_a37b4"]
 [ext_resource type="FontFile" uid="uid://34xj04f3w4pu" path="res://font/Grandstander-Medium.ttf" id="5_bucro"]
 
-[node name="PlayerBanner" type="CanvasLayer"]
+[node name="PlayerBanner" type="CanvasGroup"]
+position = Vector2(2.45465, 2.077)
 script = ExtResource("1_m7ue1")
 
 [node name="BannerSprite" type="Sprite2D" parent="."]
-position = Vector2(980.5, 585.5)
+position = Vector2(141.047, 368.424)
 rotation = 1.5708
 texture = ExtResource("3_8quur")
 
 [node name="Player" type="Label" parent="."]
-offset_left = 865.0
-offset_top = 158.0
-offset_right = 1092.0
-offset_bottom = 408.0
+offset_left = 25.5453
+offset_top = -6.077
+offset_right = 252.545
+offset_bottom = 243.923
 theme_override_fonts/font = ExtResource("5_bucro")
 theme_override_font_sizes/font_size = 76
 text = "Player"
@@ -30,21 +31,21 @@ anchor_left = 0.511
 anchor_top = 0.5
 anchor_right = 0.511
 anchor_bottom = 0.5
-offset_left = -66.1201
-offset_top = -213.0
-offset_right = 67.8799
-offset_bottom = 37.0
+offset_left = 66.5467
+offset_top = 116.924
+offset_right = 200.547
+offset_bottom = 366.924
 theme_override_fonts/font = ExtResource("4_a37b4")
-theme_override_font_sizes/font_size = 246
+theme_override_font_sizes/font_size = 181
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Player2" type="Label" parent="."]
-offset_left = 865.0
-offset_top = 440.0
-offset_right = 1092.0
-offset_bottom = 690.0
+offset_left = 24.5453
+offset_top = 201.923
+offset_right = 261.545
+offset_bottom = 451.923
 theme_override_fonts/font = ExtResource("5_bucro")
 theme_override_font_sizes/font_size = 76
 text = "ready!"
