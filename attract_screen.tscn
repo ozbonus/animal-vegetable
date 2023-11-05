@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://boyf052fqiq2g"]
+
+[ext_resource type="PackedScene" uid="uid://be156y0ll7yga" path="res://title.tscn" id="1_3fhvs"]
+[ext_resource type="PackedScene" uid="uid://ckbf8rkan17s7" path="res://attract_background.tscn" id="2_xdm8j"]
+[ext_resource type="Texture2D" uid="uid://4gtgo2ntpaun" path="res://art/bird_kakapo.png" id="4_c7lkn"]
+[ext_resource type="Texture2D" uid="uid://bp4vk6yokmjan" path="res://art/vegetable_kale.png" id="4_dwwlm"]
+
+[node name="AttractScreen" type="CanvasLayer"]
+
+[node name="Title" parent="." instance=ExtResource("1_3fhvs")]
+
+[node name="AttractBackground" parent="." instance=ExtResource("2_xdm8j")]
+x_speed = 0.6
+y_speed = -0.4
+
+[node name="VegetableKale" type="Sprite2D" parent="."]
+position = Vector2(141, 224)
+rotation = 1.26573
+scale = Vector2(1.01849, 1.01849)
+texture = ExtResource("4_dwwlm")
+
+[node name="BirdKakapo" type="Sprite2D" parent="."]
+position = Vector2(1850, 241)
+rotation = -0.34039
+scale = Vector2(1.17036, 1.17036)
+texture = ExtResource("4_c7lkn")
+flip_h = true

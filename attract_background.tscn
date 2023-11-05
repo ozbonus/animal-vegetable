@@ -11,6 +11,7 @@ y_speed = -1.5
 motion_mirroring = Vector2(2400, 2283)
 
 [node name="CanvasGroup" type="CanvasGroup" parent="ParallaxLayer"]
+modulate = Color(0.243137, 0.572549, 0.568627, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/CanvasGroup"]
 texture = ExtResource("1_rstt3")
