@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://boyf052fqiq2g"]
+[gd_scene load_steps=27 format=3 uid="uid://boyf052fqiq2g"]
 
 [ext_resource type="PackedScene" uid="uid://be156y0ll7yga" path="res://title.tscn" id="1_3fhvs"]
 [ext_resource type="Script" path="res://attract_screen.gd" id="1_lwws3"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bf8kdwnytgdk4" path="res://art/fruit_dragonfruit.png" id="10_k8qld"]
 
 [sub_resource type="Animation" id="Animation_fhcuh"]
-length = 0.001
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -65,8 +65,12 @@ tracks/0/keys = {
 "values": [Vector2(793, 1014), Vector2(793, 676)]
 }
 
+[sub_resource type="Animation" id="Animation_lhgnb"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f16nc"]
 _data = {
+"RESET": SubResource("Animation_lhgnb"),
 "slide": SubResource("Animation_mgi16")
 }
 
@@ -86,8 +90,12 @@ tracks/0/keys = {
 "values": [Vector2(1193, 1014), Vector2(1193, 676)]
 }
 
+[sub_resource type="Animation" id="Animation_ylris"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vw27o"]
 _data = {
+"RESET": SubResource("Animation_ylris"),
 "slide": SubResource("Animation_mdamy")
 }
 
