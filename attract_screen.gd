@@ -9,11 +9,6 @@ func _ready():
 	$P3BannerAnimation.play("RESET")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func _on_p_1_toggle_active_button_pressed():
 	if !ActivePlayersRepository.p1_active:
 		$P1BannerAnimation.play("slide")
