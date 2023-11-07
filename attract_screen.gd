@@ -3,7 +3,7 @@ extends CanvasLayer
 
 func _ready():
 	ActivePlayersRepository.reset()
-	ScoreRepository.reset()
+	PlayerRepository.reset()
 	$P1BannerAnimation.play("RESET")
 	$P2BannerAnimation.play("RESET")
 	$P3BannerAnimation.play("RESET")
