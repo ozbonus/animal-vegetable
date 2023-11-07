@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvg143ng18e2m"]
+[gd_scene load_steps=8 format=3 uid="uid://dvg143ng18e2m"]
 
 [ext_resource type="Texture2D" uid="uid://b0057kjw74g1r" path="res://art/transition_icon.png" id="1_1vjc3"]
 
@@ -18,8 +18,12 @@ tracks/0/keys = {
 "values": [Vector2(-1888, 0), Vector2(264, 0), Vector2(264, 0), Vector2(2534, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_keg6i"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_amp50"]
 _data = {
+"RESET": SubResource("Animation_keg6i"),
 "slide": SubResource("Animation_hequ3")
 }
 
@@ -51,8 +55,12 @@ tracks/1/keys = {
 "values": [0.0, 3.14159, 3.14159, 6.28319]
 }
 
+[sub_resource type="Animation" id="Animation_c8v84"]
+resource_name = "RESET"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8teu2"]
 _data = {
+"RESET": SubResource("Animation_c8v84"),
 "roll": SubResource("Animation_6r8v4")
 }
 
