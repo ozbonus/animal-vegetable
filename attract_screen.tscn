@@ -1,0 +1,213 @@
+[gd_scene load_steps=27 format=3 uid="uid://boyf052fqiq2g"]
+
+[ext_resource type="PackedScene" uid="uid://be156y0ll7yga" path="res://title.tscn" id="1_3fhvs"]
+[ext_resource type="Script" path="res://attract_screen.gd" id="1_lwws3"]
+[ext_resource type="PackedScene" uid="uid://ckbf8rkan17s7" path="res://attract_background.tscn" id="2_xdm8j"]
+[ext_resource type="Texture2D" uid="uid://di8dp50u5stut" path="res://art/banner05.png" id="3_e0yxe"]
+[ext_resource type="Texture2D" uid="uid://4gtgo2ntpaun" path="res://art/bird_kakapo.png" id="4_c7lkn"]
+[ext_resource type="Texture2D" uid="uid://bp4vk6yokmjan" path="res://art/vegetable_kale.png" id="4_dwwlm"]
+[ext_resource type="PackedScene" uid="uid://42hysfophalr" path="res://player_banner.tscn" id="5_pcx5d"]
+[ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="5_vx3pn"]
+[ext_resource type="Texture2D" uid="uid://dsrh8hv3p5ynj" path="res://art/banner11.png" id="6_strfw"]
+[ext_resource type="Texture2D" uid="uid://k6tihsxfc7vq" path="res://art/cat_somali.png" id="9_eaevw"]
+[ext_resource type="Texture2D" uid="uid://bf8kdwnytgdk4" path="res://art/fruit_dragonfruit.png" id="10_k8qld"]
+
+[sub_resource type="Animation" id="Animation_fhcuh"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(399, 1014)]
+}
+
+[sub_resource type="Animation" id="Animation_5mntn"]
+resource_name = "slide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(399, 1014), Vector2(399, 676)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bscgh"]
+_data = {
+"RESET": SubResource("Animation_fhcuh"),
+"slide": SubResource("Animation_5mntn")
+}
+
+[sub_resource type="Animation" id="Animation_mgi16"]
+resource_name = "slide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerBanner2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(793, 1014), Vector2(793, 676)]
+}
+
+[sub_resource type="Animation" id="Animation_lhgnb"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f16nc"]
+_data = {
+"RESET": SubResource("Animation_lhgnb"),
+"slide": SubResource("Animation_mgi16")
+}
+
+[sub_resource type="Animation" id="Animation_mdamy"]
+resource_name = "slide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerBanner3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1193, 1014), Vector2(1193, 676)]
+}
+
+[sub_resource type="Animation" id="Animation_ylris"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vw27o"]
+_data = {
+"RESET": SubResource("Animation_ylris"),
+"slide": SubResource("Animation_mdamy")
+}
+
+[sub_resource type="InputEventAction" id="InputEventAction_ehoig"]
+action = &"p1_toggle_active"
+
+[sub_resource type="Shortcut" id="Shortcut_8iy2w"]
+events = [SubResource("InputEventAction_ehoig")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_8hrfc"]
+action = &"p2_toggle_active"
+
+[sub_resource type="Shortcut" id="Shortcut_un43g"]
+events = [SubResource("InputEventAction_8hrfc")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_gmxow"]
+action = &"p3_toggle_active"
+
+[sub_resource type="Shortcut" id="Shortcut_07lus"]
+events = [SubResource("InputEventAction_gmxow")]
+
+[node name="AttractScreen" type="CanvasLayer"]
+script = ExtResource("1_lwws3")
+
+[node name="Title" parent="." instance=ExtResource("1_3fhvs")]
+
+[node name="AttractBackground" parent="." instance=ExtResource("2_xdm8j")]
+x_speed = 0.6
+y_speed = -0.4
+
+[node name="PlayerBanner1" parent="." instance=ExtResource("5_pcx5d")]
+position = Vector2(399, 1014)
+banner = ExtResource("6_strfw")
+player_number = "1"
+
+[node name="P1BannerAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PlayerBanner1")
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_bscgh")
+}
+
+[node name="PlayerBanner2" parent="." instance=ExtResource("5_pcx5d")]
+position = Vector2(793, 1014)
+banner = ExtResource("3_e0yxe")
+player_number = "2"
+
+[node name="P2BannerAnimation" type="AnimationPlayer" parent="."]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_f16nc")
+}
+
+[node name="PlayerBanner3" parent="." instance=ExtResource("5_pcx5d")]
+position = Vector2(1193, 1014)
+banner = ExtResource("5_vx3pn")
+player_number = "3"
+
+[node name="P3BannerAnimation" type="AnimationPlayer" parent="."]
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_vw27o")
+}
+
+[node name="VegetableKale" type="Sprite2D" parent="."]
+position = Vector2(141, 224)
+rotation = 1.26573
+scale = Vector2(1.01849, 1.01849)
+texture = ExtResource("4_dwwlm")
+
+[node name="BirdKakapo" type="Sprite2D" parent="."]
+position = Vector2(1850, 241)
+rotation = -0.34039
+scale = Vector2(1.17036, 1.17036)
+texture = ExtResource("4_c7lkn")
+flip_h = true
+
+[node name="CatSomali" type="Sprite2D" parent="."]
+position = Vector2(128, 869)
+rotation = 0.088024
+scale = Vector2(1.34407, 1.34407)
+texture = ExtResource("9_eaevw")
+flip_h = true
+
+[node name="FruitDragonfruit" type="Sprite2D" parent="."]
+position = Vector2(1748, 897)
+scale = Vector2(1.30965, 1.30965)
+texture = ExtResource("10_k8qld")
+
+[node name="P1ToggleActiveButton" type="Button" parent="."]
+offset_left = -142.0
+offset_right = -7.0
+offset_bottom = 31.0
+shortcut = SubResource("Shortcut_8iy2w")
+text = "p1_toggle_active"
+
+[node name="P2ToggleActiveButton" type="Button" parent="."]
+offset_left = -142.0
+offset_top = 31.0
+offset_right = -7.0
+offset_bottom = 62.0
+shortcut = SubResource("Shortcut_un43g")
+text = "p2_toggle_active"
+
+[node name="P3ToggleActiveButton" type="Button" parent="."]
+offset_left = -142.0
+offset_top = 62.0
+offset_right = -7.0
+offset_bottom = 93.0
+shortcut = SubResource("Shortcut_07lus")
+text = "p3_toggle_active"
+
+[connection signal="pressed" from="P1ToggleActiveButton" to="." method="_on_p_1_toggle_active_button_pressed"]
+[connection signal="pressed" from="P2ToggleActiveButton" to="." method="_on_p_2_toggle_active_button_pressed"]
+[connection signal="pressed" from="P3ToggleActiveButton" to="." method="_on_p_3_toggle_active_button_pressed"]

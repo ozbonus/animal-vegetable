@@ -1,0 +1,90 @@
+[gd_scene load_steps=15 format=3 uid="uid://be156y0ll7yga"]
+
+[ext_resource type="Script" path="res://title.gd" id="1_a1qnw"]
+[ext_resource type="Texture2D" uid="uid://djnk03wotrb27" path="res://art/capital_a.png" id="1_opm6m"]
+[ext_resource type="Texture2D" uid="uid://csp18jbr4h8ji" path="res://art/lower_n.png" id="3_ok6bb"]
+[ext_resource type="Texture2D" uid="uid://bgj0rin6qhpma" path="res://art/lower_i.png" id="4_x18xs"]
+[ext_resource type="Texture2D" uid="uid://3vaxj0amx0ig" path="res://art/lower_m.png" id="5_sc04q"]
+[ext_resource type="Texture2D" uid="uid://6j01eahvlxlr" path="res://art/lower_a.png" id="6_sn270"]
+[ext_resource type="Texture2D" uid="uid://cyipg1ps7cb25" path="res://art/lower_l.png" id="7_pt7rp"]
+[ext_resource type="Texture2D" uid="uid://b6ksqgkns0vuv" path="res://art/lower_o.png" id="8_6gxpg"]
+[ext_resource type="Texture2D" uid="uid://dry7ip02t464l" path="res://art/lower_r.png" id="9_jdy75"]
+[ext_resource type="Texture2D" uid="uid://ce8yquo5phjj1" path="res://art/capital_v.png" id="10_pglst"]
+[ext_resource type="Texture2D" uid="uid://c31i3ifd2dmfg" path="res://art/lower_e.png" id="11_j8dum"]
+[ext_resource type="Texture2D" uid="uid://bdrq1acbywxy0" path="res://art/lower_g.png" id="12_omoae"]
+[ext_resource type="Texture2D" uid="uid://dd5rqduua0tmm" path="res://art/lower_t.png" id="13_w4ru8"]
+[ext_resource type="Texture2D" uid="uid://bbf8uavuxawvh" path="res://art/lower_b.png" id="14_6wsad"]
+
+[node name="Title" type="CanvasLayer"]
+script = ExtResource("1_a1qnw")
+frequency = 2.0
+amplitude = 14.635
+time_shift = 1.0
+
+[node name="CapitalA" type="Sprite2D" parent="."]
+position = Vector2(515, 166)
+texture = ExtResource("1_opm6m")
+
+[node name="LowerN" type="Sprite2D" parent="."]
+position = Vector2(689, 166)
+texture = ExtResource("3_ok6bb")
+
+[node name="LowerI" type="Sprite2D" parent="."]
+position = Vector2(870, 166)
+texture = ExtResource("4_x18xs")
+
+[node name="LowerM" type="Sprite2D" parent="."]
+position = Vector2(1049, 166)
+texture = ExtResource("5_sc04q")
+
+[node name="LowerA" type="Sprite2D" parent="."]
+position = Vector2(1223, 166)
+texture = ExtResource("6_sn270")
+
+[node name="LowerL" type="Sprite2D" parent="."]
+position = Vector2(1403, 166)
+texture = ExtResource("7_pt7rp")
+
+[node name="LowerO" type="Sprite2D" parent="."]
+position = Vector2(854.5, 331)
+texture = ExtResource("8_6gxpg")
+
+[node name="LowerR" type="Sprite2D" parent="."]
+position = Vector2(1033.5, 331)
+texture = ExtResource("9_jdy75")
+
+[node name="CapitalV" type="Sprite2D" parent="."]
+position = Vector2(311.5, 486)
+texture = ExtResource("10_pglst")
+
+[node name="LowerE" type="Sprite2D" parent="."]
+position = Vector2(480.5, 486)
+texture = ExtResource("11_j8dum")
+
+[node name="LowerG" type="Sprite2D" parent="."]
+position = Vector2(648.5, 486)
+texture = ExtResource("12_omoae")
+
+[node name="LowerE2" type="Sprite2D" parent="."]
+position = Vector2(817.5, 486)
+texture = ExtResource("11_j8dum")
+
+[node name="LowerT" type="Sprite2D" parent="."]
+position = Vector2(982.5, 486)
+texture = ExtResource("13_w4ru8")
+
+[node name="LowerA2" type="Sprite2D" parent="."]
+position = Vector2(1145.5, 486)
+texture = ExtResource("6_sn270")
+
+[node name="LowerB" type="Sprite2D" parent="."]
+position = Vector2(1302.5, 486)
+texture = ExtResource("14_6wsad")
+
+[node name="LowerL2" type="Sprite2D" parent="."]
+position = Vector2(1472.5, 486)
+texture = ExtResource("7_pt7rp")
+
+[node name="LowerE3" type="Sprite2D" parent="."]
+position = Vector2(1625.5, 486)
+texture = ExtResource("11_j8dum")

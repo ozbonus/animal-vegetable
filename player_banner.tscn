@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://42hysfophalr"]
+
+[ext_resource type="Script" path="res://player_banner.gd" id="1_m7ue1"]
+[ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="3_8quur"]
+[ext_resource type="FontFile" uid="uid://dol12ydp4pjh7" path="res://font/Grandstander-Bold.ttf" id="4_a37b4"]
+[ext_resource type="AudioStream" uid="uid://bignmxcfms760" path="res://audio/PUZZLE_Game_Sound_06.mp3" id="5_3i2pw"]
+[ext_resource type="FontFile" uid="uid://34xj04f3w4pu" path="res://font/Grandstander-Medium.ttf" id="5_bucro"]
+[ext_resource type="AudioStream" uid="uid://cgyooy4trcads" path="res://audio/PUZZLE_Game_Sound_05.mp3" id="6_co1le"]
+
+[node name="PlayerBanner" type="CanvasGroup"]
+position = Vector2(2.45465, 2.077)
+script = ExtResource("1_m7ue1")
+
+[node name="BannerSprite" type="Sprite2D" parent="."]
+position = Vector2(141.047, 368.424)
+rotation = 1.5708
+texture = ExtResource("3_8quur")
+
+[node name="Player" type="Label" parent="."]
+offset_left = 25.5453
+offset_top = -6.077
+offset_right = 252.545
+offset_bottom = 243.923
+theme_override_fonts/font = ExtResource("5_bucro")
+theme_override_font_sizes/font_size = 76
+text = "Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerNumber" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.511
+anchor_top = 0.5
+anchor_right = 0.511
+anchor_bottom = 0.5
+offset_left = 66.5467
+offset_top = 116.924
+offset_right = 200.547
+offset_bottom = 366.924
+theme_override_fonts/font = ExtResource("4_a37b4")
+theme_override_font_sizes/font_size = 181
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player2" type="Label" parent="."]
+offset_left = 24.5453
+offset_top = 201.923
+offset_right = 261.545
+offset_bottom = 451.923
+theme_override_fonts/font = ExtResource("5_bucro")
+theme_override_font_sizes/font_size = 76
+text = "ready!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActivateSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_3i2pw")
+
+[node name="DeactivateSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_co1le")
