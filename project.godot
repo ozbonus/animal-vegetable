@@ -14,6 +14,11 @@ config/name="Animal Vegetable"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.png"
 
+[autoload]
+
+ScoreRepository="*res://data/score_repository.gd"
+ActivePlayersRepository="*res://data/active_players_repository.gd"
+
 [display]
 
 window/size/viewport_width=1920
