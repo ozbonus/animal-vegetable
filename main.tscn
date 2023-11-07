@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://lcr7ipeq1ldr"]
+[gd_scene load_steps=2 format=3 uid="uid://lcr7ipeq1ldr"]
+
+[ext_resource type="PackedScene" uid="uid://dpdorfrupxhqi" path="res://title_screen.tscn" id="1_w5ut2"]
 
 [node name="Main" type="Node"]
+
+[node name="TitleScreen" parent="." instance=ExtResource("1_w5ut2")]
