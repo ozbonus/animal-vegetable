@@ -12,3 +12,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func play_activate_sound():
+	$ActivateSound.play()
+
+func play_deactivate_sound():
+	$DeactivateSound.play()

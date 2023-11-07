@@ -30,3 +30,4 @@ func reset():
 	p1_active = false
 	p2_active = false
 	p3_active = false
+	print("RESET: All players are inactive.")

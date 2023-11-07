@@ -33,3 +33,4 @@ func reset():
 	p1_score = 0
 	p2_score = 0
 	p3_score = 0
+	print("RESET: All scores are 0.")
