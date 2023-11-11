@@ -1,0 +1,214 @@
+[gd_scene load_steps=16 format=3 uid="uid://3lxhxe4rp0is"]
+
+[ext_resource type="Script" path="res://age_screen.gd" id="1_ukutc"]
+[ext_resource type="PackedScene" uid="uid://ckbf8rkan17s7" path="res://attract_background.tscn" id="2_bevdu"]
+[ext_resource type="Texture2D" uid="uid://dsrh8hv3p5ynj" path="res://art/banner11.png" id="4_m8ofs"]
+[ext_resource type="Texture2D" uid="uid://cwhd00tgq1wrp" path="res://art/fukidashi_pop10.png" id="6_fp57e"]
+[ext_resource type="Texture2D" uid="uid://di8dp50u5stut" path="res://art/banner05.png" id="6_ykp5n"]
+[ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="7_7k0to"]
+[ext_resource type="FontFile" uid="uid://bnbjxfbrglbpl" path="res://font/Grandstander-ExtraBold.ttf" id="7_kuc0k"]
+[ext_resource type="PackedScene" uid="uid://c7dngkd4sttge" path="res://perry.tscn" id="8_vqqru"]
+[ext_resource type="LabelSettings" uid="uid://bo5wy00ou800" path="res://labels/p1_age.tres" id="9_37qx3"]
+[ext_resource type="PackedScene" uid="uid://dcndxqjr252nt" path="res://button_box.tscn" id="9_m26b3"]
+[ext_resource type="LabelSettings" uid="uid://o6ig4aosrpyp" path="res://labels/p2_age.tres" id="10_b0bf4"]
+[ext_resource type="LabelSettings" uid="uid://cceh64n4t04h5" path="res://labels/p3_age.tres" id="11_ig2hj"]
+[ext_resource type="PackedScene" uid="uid://bdgt44wf177wd" path="res://age_tip.tscn" id="13_j6xi3"]
+
+[sub_resource type="Animation" id="Animation_m84dp"]
+resource_name = "jiggle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0505825, 0.0988842, 0.149467),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.265), Vector2(1, 0.871), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0l37y"]
+_data = {
+"jiggle": SubResource("Animation_m84dp")
+}
+
+[node name="AgeScreen" type="Node"]
+script = ExtResource("1_ukutc")
+
+[node name="AttractBackground" parent="." instance=ExtResource("2_bevdu")]
+
+[node name="P1Content" type="Node2D" parent="."]
+
+[node name="Banner" type="Sprite2D" parent="P1Content"]
+position = Vector2(325, 677)
+rotation = 1.5708
+scale = Vector2(1.7477, 1.7477)
+texture = ExtResource("4_m8ofs")
+
+[node name="AgeLabel" type="Label" parent="P1Content"]
+offset_left = 119.0
+offset_top = 128.0
+offset_right = 536.0
+offset_bottom = 522.0
+pivot_offset = Vector2(201, 168)
+text = "8"
+label_settings = ExtResource("9_37qx3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AgeLabelAnimation" type="AnimationPlayer" parent="P1Content"]
+root_node = NodePath("../AgeLabel")
+libraries = {
+"": SubResource("AnimationLibrary_0l37y")
+}
+
+[node name="ButtonBox" parent="P1Content" instance=ExtResource("9_m26b3")]
+position = Vector2(327, 957)
+scale = Vector2(1.67, 1.67)
+
+[node name="MinusTip" parent="P1Content" instance=ExtResource("13_j6xi3")]
+position = Vector2(80, 766)
+seek_delay = 1.0
+
+[node name="Label" parent="P1Content/MinusTip" index="0"]
+text = "-"
+
+[node name="PlusTip" parent="P1Content" instance=ExtResource("13_j6xi3")]
+position = Vector2(296, 766)
+seek_delay = 0.8
+
+[node name="Label" parent="P1Content/PlusTip" index="0"]
+text = "+"
+metadata/_edit_use_anchors_ = true
+
+[node name="P2Content" type="Node2D" parent="."]
+
+[node name="Banner" type="Sprite2D" parent="P2Content"]
+position = Vector2(960, 687.931)
+rotation = 1.5708
+scale = Vector2(1.78, 1.78)
+texture = ExtResource("6_ykp5n")
+
+[node name="AgeLabel" type="Label" parent="P2Content"]
+offset_left = 758.0
+offset_top = 128.0
+offset_right = 1175.0
+offset_bottom = 522.0
+pivot_offset = Vector2(201, 168)
+text = "8"
+label_settings = ExtResource("10_b0bf4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AgeLabelAnimation" type="AnimationPlayer" parent="P2Content"]
+root_node = NodePath("../AgeLabel")
+libraries = {
+"": SubResource("AnimationLibrary_0l37y")
+}
+
+[node name="ButtonBox" parent="P2Content" instance=ExtResource("9_m26b3")]
+position = Vector2(963, 957)
+scale = Vector2(1.67, 1.67)
+
+[node name="MinusTip" parent="P2Content" instance=ExtResource("13_j6xi3")]
+position = Vector2(722, 766)
+seek_delay = 0.6
+
+[node name="Label" parent="P2Content/MinusTip" index="0"]
+text = "-"
+label_settings = ExtResource("10_b0bf4")
+metadata/_edit_use_anchors_ = true
+
+[node name="PlusTip" parent="P2Content" instance=ExtResource("13_j6xi3")]
+position = Vector2(941, 766)
+seek_delay = 0.4
+
+[node name="Label" parent="P2Content/PlusTip" index="0"]
+text = "+"
+label_settings = ExtResource("10_b0bf4")
+metadata/_edit_use_anchors_ = true
+
+[node name="P3Content" type="Node2D" parent="."]
+
+[node name="Banner" type="Sprite2D" parent="P3Content"]
+position = Vector2(1600, 687.931)
+rotation = 1.5708
+scale = Vector2(1.78, 1.78)
+texture = ExtResource("7_7k0to")
+
+[node name="AgeLabel" type="Label" parent="P3Content"]
+offset_left = 1392.0
+offset_top = 128.0
+offset_right = 1809.0
+offset_bottom = 522.0
+pivot_offset = Vector2(201, 168)
+text = "8"
+label_settings = ExtResource("11_ig2hj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AgeLabelAnimation" type="AnimationPlayer" parent="P3Content"]
+root_node = NodePath("../AgeLabel")
+libraries = {
+"": SubResource("AnimationLibrary_0l37y")
+}
+
+[node name="ButtonBox" parent="P3Content" instance=ExtResource("9_m26b3")]
+position = Vector2(1598, 957)
+scale = Vector2(1.67, 1.67)
+
+[node name="MinusTip" parent="P3Content" instance=ExtResource("13_j6xi3")]
+position = Vector2(1349, 766)
+seek_delay = 0.2
+
+[node name="Label" parent="P3Content/MinusTip" index="0"]
+text = "-"
+label_settings = ExtResource("11_ig2hj")
+metadata/_edit_use_anchors_ = true
+
+[node name="PlusTip" parent="P3Content" instance=ExtResource("13_j6xi3")]
+position = Vector2(1574, 766)
+
+[node name="Label" parent="P3Content/PlusTip" index="0"]
+text = "+"
+label_settings = ExtResource("11_ig2hj")
+metadata/_edit_use_anchors_ = true
+
+[node name="FukidashiPop10" type="Sprite2D" parent="."]
+position = Vector2(1092, 597)
+rotation = 0.0946143
+scale = Vector2(0.941092, 0.941092)
+texture = ExtResource("6_fp57e")
+flip_v = true
+
+[node name="Label" type="Label" parent="FukidashiPop10"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -695.803
+offset_top = -91.4744
+offset_right = -172.803
+offset_bottom = 137.526
+grow_horizontal = 2
+rotation = -0.0479618
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_kuc0k")
+theme_override_font_sizes/font_size = 100
+text = "How old
+are you?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Perry" parent="." instance=ExtResource("8_vqqru")]
+position = Vector2(1573, 674)
+scale = Vector2(0.6575, 0.6575)
+
+[editable path="P1Content/MinusTip"]
+[editable path="P1Content/PlusTip"]
+[editable path="P2Content/MinusTip"]
+[editable path="P2Content/PlusTip"]
+[editable path="P3Content/MinusTip"]
+[editable path="P3Content/PlusTip"]

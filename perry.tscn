@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7dngkd4sttge"]
+
+[ext_resource type="Shader" path="res://perry.gdshader" id="1_4sha5"]
+[ext_resource type="Texture2D" uid="uid://b72n1mn0uy8ne" path="res://art/fruit_bergamot_yellow.png" id="1_h3aqe"]
+[ext_resource type="Texture2D" uid="uid://clssoi13rr1bb" path="res://art/megane_eye1_frame.png" id="2_regw5"]
+[ext_resource type="Shader" path="res://perry_glasses.gdshader" id="3_ext6c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7tlcn"]
+shader = ExtResource("1_4sha5")
+shader_parameter/outline_width = 5.0
+shader_parameter/outline_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qbxha"]
+shader = ExtResource("3_ext6c")
+shader_parameter/outline_width = 4.0
+shader_parameter/outline_color = null
+
+[sub_resource type="Animation" id="Animation_xotmh"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_we6h5"]
+resource_name = "idle"
+loop_mode = 2
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ro2tl"]
+_data = {
+"RESET": SubResource("Animation_xotmh"),
+"idle": SubResource("Animation_we6h5")
+}
+
+[node name="Perry" type="Sprite2D"]
+material = SubResource("ShaderMaterial_7tlcn")
+use_parent_material = true
+position = Vector2(0, -68.75)
+texture = ExtResource("1_h3aqe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 122.336)
+
+[node name="MeganeEye1Frame" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qbxha")
+position = Vector2(-26.8484, -27.2126)
+scale = Vector2(0.8538, 0.850498)
+texture = ExtResource("2_regw5")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-9.34235, -44.8266)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-37, 91, -4, 89, -19, 107)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_ro2tl")
+}

@@ -54,11 +54,17 @@ func add_p3_score(points: int):
 	print_score_message(3, points, p3_score)
 
 
-func reset():
-	p1_age = 1
-	p2_age = 1
-	p3_age = 1
+func reset_ages() -> void:
+	p1_age = 0
+	p2_age = 0
+	p3_age = 0
+
+func reset_scores() -> void:
 	p1_score = 0
 	p2_score = 0
 	p3_score = 0
+
+func reset():
+	reset_ages()
+	reset_scores()
 	print("RESET: All scores are 1 and all scores are 0.")

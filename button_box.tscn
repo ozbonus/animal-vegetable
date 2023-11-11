@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://dcndxqjr252nt"]
+
+[ext_resource type="Texture2D" uid="uid://cjmgrrq6gkjw" path="res://art/button_box_left_down.png" id="1_b68ex"]
+[ext_resource type="Texture2D" uid="uid://0kvxem62dtpe" path="res://art/button_box_left_up.png" id="2_mu8tu"]
+[ext_resource type="Texture2D" uid="uid://cu5gwgxdo0dui" path="res://art/button_box_right_down.png" id="3_uoquc"]
+[ext_resource type="Texture2D" uid="uid://bbgda6he4j52s" path="res://art/button_box_right_up.png" id="4_r6jep"]
+[ext_resource type="Script" path="res://button_box.gd" id="5_7qfpd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p0dph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b68ex")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mu8tu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_b68ex")
+}],
+"loop": true,
+"name": &"flutter",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mu8tu")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wamj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_uoquc")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_uoquc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_r6jep")
+}],
+"loop": true,
+"name": &"flutter",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_r6jep")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[node name="ButtonBox" type="CanvasGroup"]
+script = ExtResource("5_7qfpd")
+
+[node name="Left" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p0dph")
+animation = &"up"
+centered = false
+offset = Vector2(-184, 2.08165e-12)
+
+[node name="Right" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_8wamj")
+animation = &"up"
+centered = false

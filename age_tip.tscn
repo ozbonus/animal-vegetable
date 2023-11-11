@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdgt44wf177wd"]
+
+[ext_resource type="LabelSettings" uid="uid://bo5wy00ou800" path="res://labels/p1_age.tres" id="1_5pjhv"]
+[ext_resource type="Script" path="res://age_tip.gd" id="2_7depu"]
+
+[sub_resource type="Animation" id="Animation_7gh2m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hwdet"]
+resource_name = "wave"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(5.27803, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2vuhn"]
+_data = {
+"RESET": SubResource("Animation_7gh2m"),
+"wave": SubResource("Animation_hwdet")
+}
+
+[node name="AgeTip" type="Node2D"]
+script = ExtResource("2_7depu")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 288.0
+offset_bottom = 303.0
+text = "@"
+label_settings = ExtResource("1_5pjhv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Label")
+autoplay = "wave"
+speed_scale = 1.2
+libraries = {
+"": SubResource("AnimationLibrary_2vuhn")
+}

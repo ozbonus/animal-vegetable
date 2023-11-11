@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://o6ig4aosrpyp"]
+
+[ext_resource type="FontFile" uid="uid://bnbjxfbrglbpl" path="res://font/Grandstander-ExtraBold.ttf" id="1_h2hat"]
+
+[resource]
+font = ExtResource("1_h2hat")
+font_size = 300
+outline_size = 55
+outline_color = Color(0.360784, 0.282353, 0, 1)
