@@ -1,0 +1,270 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvg143ng18e2m"]
+
+[ext_resource type="Texture2D" uid="uid://b0057kjw74g1r" path="res://art/transition_icon.png" id="1_1vjc3"]
+[ext_resource type="Script" path="res://screen_transition.gd" id="1_h8qes"]
+
+[sub_resource type="Animation" id="Animation_y3niy"]
+resource_name = "RESET"
+
+[sub_resource type="Animation" id="Animation_trjaq"]
+resource_name = "slide_in"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(-1901, 0), Vector2(294, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TransitionIcon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(-1301, 540), Vector2(960, 540)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TransitionIcon:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_rpayv"]
+resource_name = "slide_out"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(294, 0), Vector2(2514, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TransitionIcon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, 540), Vector2(3159, 540)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TransitionIcon:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.48787e-16, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ww212"]
+_data = {
+"RESET": SubResource("Animation_y3niy"),
+"slide_in": SubResource("Animation_trjaq"),
+"slide_out": SubResource("Animation_rpayv")
+}
+
+[node name="ScreenTransition" type="CanvasLayer"]
+layer = 128
+script = ExtResource("1_h8qes")
+
+[node name="Background" type="CanvasGroup" parent="."]
+position = Vector2(-1901, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+offset_left = -537.0
+offset_right = 1832.0
+offset_bottom = 1088.0
+size_flags_horizontal = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="Background"]
+position = Vector2(-120, -48)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 16)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 80)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D4" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 144)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D5" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 208)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D6" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 272)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D7" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 336)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D8" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 400)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D9" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 464)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D10" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 528)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D11" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 592)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D12" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 656)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D13" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 720)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D14" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 784)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D15" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 848)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D16" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 912)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D17" type="Polygon2D" parent="Background"]
+position = Vector2(-120, 976)
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D18" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 112)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D19" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 176)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D20" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 240)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D21" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 304)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D22" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 368)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D23" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 432)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D24" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 496)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D25" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 560)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D26" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 624)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D27" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 688)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D28" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 752)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D29" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 816)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D30" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 880)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D31" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 944)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D32" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 1008)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D33" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 1072)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="Polygon2D34" type="Polygon2D" parent="Background"]
+position = Vector2(1415, 1136)
+rotation = 3.14159
+polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
+
+[node name="TransitionIcon" type="Sprite2D" parent="."]
+position = Vector2(-1301, 540)
+scale = Vector2(2, 2)
+texture = ExtResource("1_1vjc3")
+
+[node name="ScreenTransitionAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ww212")
+}
