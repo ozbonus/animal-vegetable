@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhqm12i2l1mk3"]
+
+[ext_resource type="Script" path="res://game_test.gd" id="1_op73s"]
+[ext_resource type="Texture2D" uid="uid://buiwnu8rhpng2" path="res://icon.svg" id="2_gai28"]
+
+[node name="GameTest" type="Node"]
+script = ExtResource("1_op73s")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.0509804, 0.494118, 1, 1)
+metadata/_edit_lock_ = true
+
+[node name="Position1" type="Node2D" parent="."]
+position = Vector2(854, 163)
+
+[node name="Position2" type="Node2D" parent="."]
+position = Vector2(854, 352)
+
+[node name="Position3" type="Node2D" parent="."]
+position = Vector2(854, 518)
+
+[node name="Position4" type="Node2D" parent="."]
+position = Vector2(854, 705)
+
+[node name="Position5" type="Node2D" parent="."]
+position = Vector2(854, 865)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(1824, 983)
+texture = ExtResource("2_gai28")
