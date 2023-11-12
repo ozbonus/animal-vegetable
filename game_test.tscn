@@ -1,34 +1,101 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhqm12i2l1mk3"]
+[gd_scene load_steps=8 format=3 uid="uid://dhqm12i2l1mk3"]
 
 [ext_resource type="Script" path="res://game_test.gd" id="1_op73s"]
-[ext_resource type="Texture2D" uid="uid://buiwnu8rhpng2" path="res://icon.svg" id="2_gai28"]
+[ext_resource type="PackedScene" uid="uid://b5j3xh8o6vjb7" path="res://card.tscn" id="2_7a0j3"]
+[ext_resource type="Texture2D" uid="uid://bqtsxypqvqgn7" path="res://art/message_fantastic.png" id="3_6y8j5"]
+[ext_resource type="AudioStream" uid="uid://dajbrjqhd4cfq" path="res://audio/Success5.wav" id="4_msw78"]
+
+[sub_resource type="Animation" id="Animation_g6gj7"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, -127.395)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.525, 0.525), Vector2(1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_f7cgj"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tmucx"]
+_data = {
+"RESET": SubResource("Animation_f7cgj"),
+"show": SubResource("Animation_g6gj7")
+}
 
 [node name="GameTest" type="Node"]
 script = ExtResource("1_op73s")
+difficulty_up_interval = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1920.0
+offset_left = 751.0
+offset_right = 1165.0
 offset_bottom = 1080.0
 color = Color(0.0509804, 0.494118, 1, 1)
 metadata/_edit_lock_ = true
 
-[node name="Position1" type="Node2D" parent="."]
-position = Vector2(854, 163)
+[node name="Card1" parent="." instance=ExtResource("2_7a0j3")]
+position = Vector2(952, 131)
 
-[node name="Position2" type="Node2D" parent="."]
-position = Vector2(854, 352)
+[node name="Card2" parent="." instance=ExtResource("2_7a0j3")]
+position = Vector2(952, 299)
 
-[node name="Position3" type="Node2D" parent="."]
-position = Vector2(854, 518)
+[node name="Card3" parent="." instance=ExtResource("2_7a0j3")]
+position = Vector2(952, 467)
 
-[node name="Position4" type="Node2D" parent="."]
-position = Vector2(854, 705)
+[node name="Card4" parent="." instance=ExtResource("2_7a0j3")]
+position = Vector2(952, 635)
 
-[node name="Position5" type="Node2D" parent="."]
-position = Vector2(854, 865)
+[node name="Card5" parent="." instance=ExtResource("2_7a0j3")]
+position = Vector2(952, 803)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Congrats" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(952, 859)
+scale = Vector2(0.525, 0.525)
+texture = ExtResource("3_6y8j5")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(1824, 983)
-texture = ExtResource("2_gai28")
+[node name="CongratsSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_msw78")
+
+[node name="CongratsAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Congrats")
+libraries = {
+"": SubResource("AnimationLibrary_tmucx")
+}
+
+[connection signal="result" from="Card1" to="." method="_on_card_1_result"]
+[connection signal="result" from="Card2" to="." method="_on_card_2_result"]
+[connection signal="result" from="Card3" to="." method="_on_card_3_result"]
+[connection signal="result" from="Card4" to="." method="_on_card_4_result"]
+[connection signal="result" from="Card5" to="." method="_on_card_5_result"]
