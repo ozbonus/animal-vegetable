@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://bqdq1pkqdmuhp"]
+
+[ext_resource type="Texture2D" uid="uid://dsrh8hv3p5ynj" path="res://art/banner11.png" id="1_ibuqy"]
+[ext_resource type="Script" path="res://player_ready_banner.gd" id="1_v8xmw"]
+[ext_resource type="FontFile" uid="uid://bnbjxfbrglbpl" path="res://font/Grandstander-ExtraBold.ttf" id="2_x4s72"]
+[ext_resource type="AudioStream" uid="uid://bignmxcfms760" path="res://audio/PUZZLE_Game_Sound_06.mp3" id="3_e8gpp"]
+[ext_resource type="AudioStream" uid="uid://cgyooy4trcads" path="res://audio/PUZZLE_Game_Sound_05.mp3" id="4_5rquo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q4sl0"]
+font = ExtResource("2_x4s72")
+font_size = 78
+outline_size = 25
+outline_color = Color(0.294118, 0, 0.141176, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qen08"]
+font = ExtResource("2_x4s72")
+font_size = 200
+outline_size = 25
+outline_color = Color(0.294118, 0, 0.141176, 1)
+
+[sub_resource type="Animation" id="Animation_k8b6h"]
+resource_name = "up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -392)]
+}
+
+[sub_resource type="Animation" id="Animation_6dxs8"]
+resource_name = "down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, -392), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_naouj"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ot6e8"]
+_data = {
+"RESET": SubResource("Animation_naouj"),
+"down": SubResource("Animation_6dxs8"),
+"up": SubResource("Animation_k8b6h")
+}
+
+[node name="PlayerReadyBanner" type="Node2D"]
+script = ExtResource("1_v8xmw")
+metadata/_edit_horizontal_guides_ = [-333.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_ibuqy")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_left = -293.0
+offset_top = 116.0
+offset_right = -56.0
+offset_bottom = 198.0
+rotation = -1.5708
+text = "Player"
+label_settings = SubResource("LabelSettings_q4sl0")
+
+[node name="Label2" type="Label" parent="Sprite2D"]
+offset_left = -204.0
+offset_top = 112.0
+offset_right = 33.0
+offset_bottom = 315.0
+rotation = -1.5708
+text = "1"
+label_settings = SubResource("LabelSettings_qen08")
+horizontal_alignment = 1
+
+[node name="ActivateSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_e8gpp")
+
+[node name="DeactivateSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5rquo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ot6e8")
+}

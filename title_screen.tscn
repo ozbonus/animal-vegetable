@@ -1,102 +1,40 @@
-[gd_scene load_steps=21 format=3 uid="uid://dpdorfrupxhqi"]
+[gd_scene load_steps=18 format=3 uid="uid://dpdorfrupxhqi"]
 
 [ext_resource type="PackedScene" uid="uid://be156y0ll7yga" path="res://title.tscn" id="1_gmaar"]
 [ext_resource type="Script" path="res://title_screen.gd" id="1_ugaor"]
 [ext_resource type="PackedScene" uid="uid://ckbf8rkan17s7" path="res://attract_background.tscn" id="2_av1vp"]
-[ext_resource type="PackedScene" uid="uid://42hysfophalr" path="res://player_banner.tscn" id="3_n6fwn"]
-[ext_resource type="Texture2D" uid="uid://dsrh8hv3p5ynj" path="res://art/banner11.png" id="4_tslef"]
 [ext_resource type="Texture2D" uid="uid://di8dp50u5stut" path="res://art/banner05.png" id="5_d8t7s"]
 [ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="6_dwc3r"]
 [ext_resource type="Texture2D" uid="uid://bp4vk6yokmjan" path="res://art/vegetable_kale.png" id="7_rot0h"]
+[ext_resource type="Texture2D" uid="uid://chhkt30l2vt4b" path="res://art/banner06.png" id="8_4ph62"]
 [ext_resource type="Texture2D" uid="uid://4gtgo2ntpaun" path="res://art/bird_kakapo.png" id="8_l6v6v"]
 [ext_resource type="Texture2D" uid="uid://k6tihsxfc7vq" path="res://art/cat_somali.png" id="9_vf70x"]
 [ext_resource type="Texture2D" uid="uid://bf8kdwnytgdk4" path="res://art/fruit_dragonfruit.png" id="10_ahmjd"]
+[ext_resource type="PackedScene" uid="uid://bqdq1pkqdmuhp" path="res://player_ready_banner.tscn" id="12_jojw3"]
 
-[sub_resource type="Animation" id="Animation_fhcuh"]
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(399, 1014)]
-}
+[sub_resource type="Animation" id="Animation_63o12"]
+resource_name = "p1"
+length = 0.5
 
-[sub_resource type="Animation" id="Animation_5mntn"]
-resource_name = "slide"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(399, 1014), Vector2(399, 676)]
-}
+[sub_resource type="Animation" id="Animation_usxna"]
+length = 0.5
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bscgh"]
-_data = {
-"RESET": SubResource("Animation_fhcuh"),
-"slide": SubResource("Animation_5mntn")
-}
+[sub_resource type="Animation" id="Animation_ecn4u"]
+length = 0.5
 
-[sub_resource type="Animation" id="Animation_lhgnb"]
+[sub_resource type="Animation" id="Animation_eu5xp"]
+length = 0.5
+
+[sub_resource type="Animation" id="Animation_knckd"]
 length = 0.001
 
-[sub_resource type="Animation" id="Animation_mgi16"]
-resource_name = "slide"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerBanner2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(793, 1014), Vector2(793, 676)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f16nc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vffla"]
 _data = {
-"RESET": SubResource("Animation_lhgnb"),
-"slide": SubResource("Animation_mgi16")
-}
-
-[sub_resource type="Animation" id="Animation_ylris"]
-length = 0.001
-
-[sub_resource type="Animation" id="Animation_mdamy"]
-resource_name = "slide"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerBanner3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1193, 1014), Vector2(1193, 676)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vw27o"]
-_data = {
-"RESET": SubResource("Animation_ylris"),
-"slide": SubResource("Animation_mdamy")
+"RESET": SubResource("Animation_knckd"),
+"p1": SubResource("Animation_63o12"),
+"p2": SubResource("Animation_usxna"),
+"p3": SubResource("Animation_ecn4u"),
+"p4": SubResource("Animation_eu5xp")
 }
 
 [node name="TitleScreen" type="Node"]
@@ -107,40 +45,6 @@ script = ExtResource("1_ugaor")
 [node name="AttractBackground" parent="." instance=ExtResource("2_av1vp")]
 x_speed = 0.6
 y_speed = -0.4
-
-[node name="PlayerBanner1" parent="." instance=ExtResource("3_n6fwn")]
-position = Vector2(399, 1014)
-banner = ExtResource("4_tslef")
-player_number = "1"
-
-[node name="P1BannerAnimation" type="AnimationPlayer" parent="."]
-root_node = NodePath("../PlayerBanner1")
-speed_scale = 2.0
-libraries = {
-"": SubResource("AnimationLibrary_bscgh")
-}
-
-[node name="PlayerBanner2" parent="." instance=ExtResource("3_n6fwn")]
-position = Vector2(793, 1014)
-banner = ExtResource("5_d8t7s")
-player_number = "2"
-
-[node name="P2BannerAnimation" type="AnimationPlayer" parent="."]
-speed_scale = 2.0
-libraries = {
-"": SubResource("AnimationLibrary_f16nc")
-}
-
-[node name="PlayerBanner3" parent="." instance=ExtResource("3_n6fwn")]
-position = Vector2(1193, 1014)
-banner = ExtResource("6_dwc3r")
-player_number = "3"
-
-[node name="P3BannerAnimation" type="AnimationPlayer" parent="."]
-speed_scale = 2.0
-libraries = {
-"": SubResource("AnimationLibrary_vw27o")
-}
 
 [node name="VegetableKale" type="Sprite2D" parent="."]
 position = Vector2(141, 224)
@@ -166,3 +70,37 @@ flip_h = true
 position = Vector2(1748, 897)
 scale = Vector2(1.30965, 1.30965)
 texture = ExtResource("10_ahmjd")
+
+[node name="BannerAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vffla")
+}
+
+[node name="PlayerReadyBanner1" parent="." instance=ExtResource("12_jojw3")]
+position = Vector2(446, 1389)
+
+[node name="PlayerReadyBanner2" parent="." instance=ExtResource("12_jojw3")]
+position = Vector2(754, 1389)
+player_num = "2"
+
+[node name="Sprite2D" parent="PlayerReadyBanner2" index="0"]
+texture = ExtResource("5_d8t7s")
+
+[node name="PlayerReadyBanner3" parent="." instance=ExtResource("12_jojw3")]
+position = Vector2(1064, 1391)
+player_num = "3"
+
+[node name="Sprite2D" parent="PlayerReadyBanner3" index="0"]
+texture = ExtResource("6_dwc3r")
+
+[node name="PlayerReadyBanner4" parent="." instance=ExtResource("12_jojw3")]
+position = Vector2(1368, 1389)
+player_num = "4"
+
+[node name="Sprite2D" parent="PlayerReadyBanner4" index="0"]
+texture = ExtResource("8_4ph62")
+
+[editable path="PlayerReadyBanner1"]
+[editable path="PlayerReadyBanner2"]
+[editable path="PlayerReadyBanner3"]
+[editable path="PlayerReadyBanner4"]
