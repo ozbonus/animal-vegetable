@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhqm12i2l1mk3"]
+[gd_scene load_steps=9 format=3 uid="uid://dhqm12i2l1mk3"]
 
 [ext_resource type="Script" path="res://game_test.gd" id="1_op73s"]
 [ext_resource type="PackedScene" uid="uid://b5j3xh8o6vjb7" path="res://card.tscn" id="2_7a0j3"]
 [ext_resource type="Texture2D" uid="uid://bqtsxypqvqgn7" path="res://art/message_fantastic.png" id="3_6y8j5"]
 [ext_resource type="AudioStream" uid="uid://dajbrjqhd4cfq" path="res://audio/Success5.wav" id="4_msw78"]
+[ext_resource type="PackedScene" uid="uid://8mqeigswc8xo" path="res://target_arrow.tscn" id="5_mwfss"]
+
+[sub_resource type="Animation" id="Animation_f7cgj"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_g6gj7"]
 resource_name = "show"
@@ -44,9 +48,6 @@ tracks/2/keys = {
 "values": [Vector2(0.525, 0.525), Vector2(1, 1), Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_f7cgj"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tmucx"]
 _data = {
 "RESET": SubResource("Animation_f7cgj"),
@@ -56,6 +57,8 @@ _data = {
 [node name="GameTest" type="Node"]
 script = ExtResource("1_op73s")
 difficulty_up_interval = 1
+metadata/_edit_vertical_guides_ = [865.0]
+metadata/_edit_horizontal_guides_ = [87.0, 254.0, 423.0, 590.0, 758.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 751.0
@@ -93,6 +96,24 @@ root_node = NodePath("../Congrats")
 libraries = {
 "": SubResource("AnimationLibrary_tmucx")
 }
+
+[node name="TargetArrows" type="Node2D" parent="."]
+position = Vector2(-16, -8)
+
+[node name="TargetArrow1" parent="TargetArrows" instance=ExtResource("5_mwfss")]
+position = Vector2(865, 87)
+
+[node name="TargetArrow2" parent="TargetArrows" instance=ExtResource("5_mwfss")]
+position = Vector2(865, 254)
+
+[node name="TargetArrow3" parent="TargetArrows" instance=ExtResource("5_mwfss")]
+position = Vector2(865, 423)
+
+[node name="TargetArrow4" parent="TargetArrows" instance=ExtResource("5_mwfss")]
+position = Vector2(865, 590)
+
+[node name="TargetArrow5" parent="TargetArrows" instance=ExtResource("5_mwfss")]
+position = Vector2(865, 758)
 
 [connection signal="result" from="Card1" to="." method="_on_card_1_result"]
 [connection signal="result" from="Card2" to="." method="_on_card_2_result"]

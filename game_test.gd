@@ -61,6 +61,8 @@ func card_game_loop() -> void:
 				deal_set(4, true)
 			Difficulty.hard5:
 				deal_set(5, true)
+		
+	show_target_arrow(target)
 	
 	if Input.is_action_just_pressed("debug_animal") and target < cards.size():
 		cards[target].answer(Enums.Kind.animal)
@@ -109,6 +111,11 @@ func deal_set(count: int, difficult: bool=false):
 		card.appear(index, difficult)
 		cards.append(card)
 		index += 1
+
+
+func show_target_arrow(index: int):
+	$TargetArrows.get_children().map(func(x): x.hide())
+	$TargetArrows.get_children()[index].show()
 
 
 func award_card_points(value: int) -> void:
