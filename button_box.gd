@@ -1,7 +1,7 @@
 extends Node
 
 
-enum State {REACTIVE, MASH, LEFT, RIGHT}
+enum State {STOP, REACTIVE, MASH, LEFT, RIGHT}
 @export var state := State.REACTIVE
 @export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
 
@@ -17,6 +17,9 @@ func _process(delta):
 		[$LeftHand, $RightHand].map(func(x): x.show())
 		
 	match state:
+		State.STOP:
+			$Left.play("up")
+			$Right.play("up")
 		State.REACTIVE:
 			if Input.is_action_pressed("%s_left" % player_num):
 				$Left.play("down")
@@ -38,6 +41,7 @@ func _process(delta):
 			$Right.play("down")
 
 
+func stop() -> void: state = State.STOP
 func left_down() -> void: state = State.LEFT
 func right_down() -> void: state = State.RIGHT
 func reactive() -> void: state = State.REACTIVE

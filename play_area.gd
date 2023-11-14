@@ -30,17 +30,27 @@ var need_cards: bool = true
 
 
 func _ready():
-	mode = Mode.CARD
+	mode = Mode.COUNTDOWN
 	difficulty_level = starting_difficulty
 
 
 func _process(delta):
+	if mode == Mode.COUNTDOWN:
+		countdown_loop()
 	if mode == Mode.CARD:
 		card_game_loop()
 	if mode == Mode.MASH:
 		mash_game_loop()
 	if mode == Mode.MASH_COOLDOWN:
 		mash_cooldown_loop()
+
+
+func countdown_loop():
+	$TargetArrows.hide()
+	$ButtonBox.stop()
+	$MashVisuals.hide()
+	if Input.is_anything_pressed():
+		pass
 		
 		
 func card_game_loop() -> void:
