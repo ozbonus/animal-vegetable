@@ -27,6 +27,7 @@ var mode: Mode
 var perfect_set_streak: int = 0
 var failed_set_streak: int = 0
 var need_cards: bool = true
+var need_mode_setup = true
 
 
 func _ready():
@@ -54,9 +55,12 @@ func countdown_loop():
 		
 		
 func card_game_loop() -> void:
-	$MashVisuals.hide()
-	$ButtonBox.reactive()
-	$TargetArrows.show()
+	if need_mode_setup:
+		$MashVisuals.hide()
+		$ButtonBox.reactive()
+		$TargetArrows.show()
+		need_mode_setup = false
+		
 	# Runs when there are no cards or the set of cards is complete.
 	if need_cards:
 		need_cards = false
@@ -116,27 +120,33 @@ func card_game_loop() -> void:
 		cards.clear()
 		target = 0
 		need_cards = true
+		print(score)
 		
 		if perfect_set_streak % mash_interval == 0 and perfect_set_streak != 0:
+			need_mode_setup = true
 			mode = Mode.MASH
 
 
 
 func mash_game_loop() -> void:
-	$TargetArrows.hide()
+	if need_mode_setup:
+		$TargetArrows.hide()
+		$ButtonBox.mash()
+		$MashVisuals.show()
+		$MashVisuals.start_timer()
+		need_mode_setup = false
 	[$Card1, $Card2, $Card3, $Card4, $Card5].map(func (x): x.hide())
 	if Input.is_action_just_pressed("%s_left" % player_num):
 		$MashVisuals.increase_mash_score()
 	if Input.is_action_just_pressed("%s_right" % player_num):
 		$MashVisuals.increase_mash_score()
-	$ButtonBox.mash()
-	$MashVisuals.show()
-	$MashVisuals.start_timer()
 
 
 func mash_cooldown_loop() -> void:
-	$MashVisuals.hide()
-	$ButtonBox.reactive()
+	if need_mode_setup:
+		$MashVisuals.hide()
+		$ButtonBox.reactive()
+		need_mode_setup = false
 	if $MashCoolDownTimer.time_left > 0:
 		pass
 	else:
@@ -224,7 +234,7 @@ func _on_card_5_result(value: int):
 
 func _on_mash_visuals_mash_complete(mash_score):
 	print("Mash Score: ", mash_score)
-	score += mash_score * mash_multiplier
+	score += mash_score * mash_multiplier * 2
 	$CongratsAnimation.play("show")
 	$MashCoins.amount = mash_score
 	$MashCoins.emitting = true
@@ -233,4 +243,5 @@ func _on_mash_visuals_mash_complete(mash_score):
 
 
 func _on_mash_cool_down_timer_timeout():
+	need_mode_setup = true
 	mode = Mode.CARD

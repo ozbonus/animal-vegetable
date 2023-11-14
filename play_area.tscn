@@ -12,6 +12,18 @@
 
 [sub_resource type="Animation" id="Animation_f7cgj"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 2.31)]
+}
 
 [sub_resource type="Animation" id="Animation_g6gj7"]
 resource_name = "show"
@@ -49,7 +61,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.525, 0.525), Vector2(1, 1), Vector2(1, 1)]
+"values": [Vector2(0.2, 0.525), Vector2(0.6, 1), Vector2(0.6, 0.6)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tmucx"]
@@ -61,6 +73,7 @@ _data = {
 [node name="PlayArea" type="Node2D"]
 script = ExtResource("1_vr8wc")
 difficulty_up_interval = 1
+mash_multiplier = 70
 
 [node name="Banner11" type="Sprite2D" parent="."]
 position = Vector2(210, 582)
@@ -69,25 +82,24 @@ scale = Vector2(1.44475, 1.44475)
 texture = ExtResource("2_r1p4o")
 
 [node name="Card1" parent="." instance=ExtResource("2_7a0j3")]
+z_index = 10
 position = Vector2(210, 131)
 
 [node name="Card2" parent="." instance=ExtResource("2_7a0j3")]
+z_index = 10
 position = Vector2(210, 299)
 
 [node name="Card3" parent="." instance=ExtResource("2_7a0j3")]
+z_index = 10
 position = Vector2(210, 467)
 
 [node name="Card4" parent="." instance=ExtResource("2_7a0j3")]
+z_index = 10
 position = Vector2(210, 635)
 
 [node name="Card5" parent="." instance=ExtResource("2_7a0j3")]
+z_index = 10
 position = Vector2(210, 803)
-
-[node name="Congrats" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(210, 859)
-scale = Vector2(0.525, 0.525)
-texture = ExtResource("3_6y8j5")
 
 [node name="CongratsSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_msw78")
@@ -99,6 +111,7 @@ libraries = {
 }
 
 [node name="TargetArrows" type="Node2D" parent="."]
+z_index = 20
 
 [node name="TargetArrow1" parent="TargetArrows" instance=ExtResource("5_mwfss")]
 position = Vector2(107, 79)
@@ -116,11 +129,19 @@ position = Vector2(107, 582)
 position = Vector2(107, 750)
 
 [node name="ButtonBox" parent="." instance=ExtResource("6_fgok2")]
+z_index = 4096
 position = Vector2(211, 980)
 scale = Vector2(1.21711, 1.21711)
 
 [node name="MashVisuals" parent="." instance=ExtResource("7_i7mvp")]
 position = Vector2(-40, 278)
+
+[node name="Congrats" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+position = Vector2(211, 739)
+scale = Vector2(1, 2.31)
+texture = ExtResource("3_6y8j5")
 
 [node name="MashCoins" type="CPUParticles2D" parent="."]
 position = Vector2(212, 509)
