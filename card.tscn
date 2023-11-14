@@ -1,0 +1,134 @@
+[gd_scene load_steps=17 format=3 uid="uid://b5j3xh8o6vjb7"]
+
+[ext_resource type="Texture2D" uid="uid://buiwnu8rhpng2" path="res://icon.svg" id="1_udoeo"]
+[ext_resource type="Script" path="res://card.gd" id="2_7tgoh"]
+[ext_resource type="Shader" path="res://perry_glasses.gdshader" id="2_yr00d"]
+[ext_resource type="Texture2D" uid="uid://b1n8t1ev6itdl" path="res://art/money_dollar_coin2.png" id="3_y3pl7"]
+[ext_resource type="Texture2D" uid="uid://cu8s735e8qjx8" path="res://art/money_dollar_bill1.png" id="4_40ra6"]
+[ext_resource type="Texture2D" uid="uid://dx7fsee7jjfcl" path="res://art/explosion_sheet.png" id="5_akemb"]
+[ext_resource type="AudioStream" uid="uid://cfd03vn5vshdi" path="res://audio/Success4.wav" id="6_iyx14"]
+[ext_resource type="AudioStream" uid="uid://oap72y66v1uw" path="res://audio/Error5.wav" id="7_wypuk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_duunh"]
+shader = ExtResource("2_yr00d")
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_je6uw"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_tf8js"]
+resource_name = "appear"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ugx4"]
+_data = {
+"RESET": SubResource("Animation_je6uw"),
+"appear": SubResource("Animation_tf8js")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_elka3"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_1gv1i"]
+offsets = PackedFloat32Array(0, 0.0751445, 0.144509, 0.34104, 0.67052, 0.849711)
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 0, 1, 1, 0.18, 0.18, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n8bo0"]
+gradient = SubResource("Gradient_1gv1i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iuoc1"]
+emission_shape = 1
+emission_sphere_radius = 128.0
+particle_flag_disable_z = true
+gravity = Vector3(2.08165e-12, -100, 2.08165e-12)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 90.0
+scale_min = 4.0
+scale_max = 5.0
+color_ramp = SubResource("GradientTexture1D_n8bo0")
+anim_speed_min = 1.0
+anim_speed_max = 2.0
+
+[node name="Card" type="Node2D"]
+script = ExtResource("2_7tgoh")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 10
+material = SubResource("ShaderMaterial_duunh")
+texture = ExtResource("1_udoeo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
+libraries = {
+"": SubResource("AnimationLibrary_4ugx4")
+}
+
+[node name="Coins" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 6
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("3_y3pl7")
+direction = Vector2(2.08165e-12, -1)
+spread = 103.33
+gravity = Vector2(2.08165e-12, 2700)
+initial_velocity_min = 342.6
+initial_velocity_max = 814.82
+angular_velocity_min = 53.33
+angular_velocity_max = 93.33
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="Notes" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+emitting = false
+amount = 2
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("4_40ra6")
+direction = Vector2(2.08165e-12, -1)
+spread = 103.33
+gravity = Vector2(2.08165e-12, 1500)
+initial_velocity_min = 342.6
+initial_velocity_max = 814.82
+angular_velocity_min = 53.33
+angular_velocity_max = 93.33
+angle_max = 69.7
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="Explosion" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_elka3")
+emitting = false
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_iuoc1")
+texture = ExtResource("5_akemb")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+
+[node name="CorrectSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_iyx14")
+
+[node name="MistakeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_wypuk")
+volume_db = 12.0

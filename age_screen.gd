@@ -48,7 +48,7 @@ func _process(delta):
 		if Input.is_action_pressed("p1_age_up"):
 			$P1Content/ButtonBox.right_down()
 		if Input.is_action_just_released("p1_age_up"):
-			$P1Content/ButtonBox.right_up()
+			$P1Content/ButtonBox.right_up()a
 
 	if p2_active or debug:
 		if Input.is_action_just_pressed("p2_age_down"):
