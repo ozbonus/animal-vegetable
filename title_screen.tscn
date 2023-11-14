@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bf8kdwnytgdk4" path="res://art/fruit_dragonfruit.png" id="10_ahmjd"]
 [ext_resource type="PackedScene" uid="uid://bqdq1pkqdmuhp" path="res://player_ready_banner.tscn" id="12_jojw3"]
 
+[sub_resource type="Animation" id="Animation_knckd"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_63o12"]
 resource_name = "p1"
 length = 0.5
@@ -24,9 +27,6 @@ length = 0.5
 
 [sub_resource type="Animation" id="Animation_eu5xp"]
 length = 0.5
-
-[sub_resource type="Animation" id="Animation_knckd"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vffla"]
 _data = {

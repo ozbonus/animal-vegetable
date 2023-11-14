@@ -18,6 +18,9 @@ player_num = "p2"
 [node name="Banner11" parent="P2PlayArea" index="0"]
 texture = ExtResource("2_s67xl")
 
+[node name="ButtonBox" parent="P2PlayArea" index="9"]
+player_num = "p2"
+
 [node name="P3PlayArea" parent="." instance=ExtResource("1_ixv42")]
 position = Vector2(999, 0)
 player_num = "p3"
@@ -25,12 +28,18 @@ player_num = "p3"
 [node name="Banner11" parent="P3PlayArea" index="0"]
 texture = ExtResource("3_4au25")
 
+[node name="ButtonBox" parent="P3PlayArea" index="9"]
+player_num = "p3"
+
 [node name="P4PlayArea" parent="." instance=ExtResource("1_ixv42")]
 position = Vector2(1465, 0)
 player_num = "p4"
 
 [node name="Banner11" parent="P4PlayArea" index="0"]
 texture = ExtResource("4_wahlu")
+
+[node name="ButtonBox" parent="P4PlayArea" index="9"]
+player_num = "p4"
 
 [node name="AttractBackground" parent="." instance=ExtResource("5_sik6u")]
 
