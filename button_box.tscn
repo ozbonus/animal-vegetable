@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcndxqjr252nt"]
+[gd_scene load_steps=11 format=3 uid="uid://dcndxqjr252nt"]
 
 [ext_resource type="Texture2D" uid="uid://cjmgrrq6gkjw" path="res://art/button_box_left_down.png" id="1_b68ex"]
 [ext_resource type="Texture2D" uid="uid://0kvxem62dtpe" path="res://art/button_box_left_up.png" id="2_mu8tu"]
 [ext_resource type="Texture2D" uid="uid://cu5gwgxdo0dui" path="res://art/button_box_right_down.png" id="3_uoquc"]
 [ext_resource type="Texture2D" uid="uid://bbgda6he4j52s" path="res://art/button_box_right_up.png" id="4_r6jep"]
 [ext_resource type="Script" path="res://button_box.gd" id="5_7qfpd"]
+[ext_resource type="Texture2D" uid="uid://c7kdb80raww0w" path="res://art/computer_cursor_finger_white.png" id="6_kp4yr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p0dph"]
 animations = [{
@@ -66,17 +67,71 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_td3w5"]
+resource_name = "mash"
+length = 0.10001
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(-98, -35), Vector2(-98, -51)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightHand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(98, -51), Vector2(98, -35)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2tu48"]
+_data = {
+"mash": SubResource("Animation_td3w5")
+}
+
 [node name="ButtonBox" type="CanvasGroup"]
+position = Vector2(187, 125)
 script = ExtResource("5_7qfpd")
 
 [node name="Left" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p0dph")
-animation = &"up"
+animation = &"flutter"
 centered = false
 offset = Vector2(-184, 2.08165e-12)
 
 [node name="Right" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_8wamj")
-animation = &"up"
+animation = &"flutter"
 centered = false
+
+[node name="LeftHand" type="Sprite2D" parent="."]
+position = Vector2(-98, -35)
+rotation = 2.87979
+scale = Vector2(0.656094, 0.656094)
+texture = ExtResource("6_kp4yr")
+
+[node name="RightHand" type="Sprite2D" parent="."]
+position = Vector2(98, -35)
+rotation = -2.87979
+scale = Vector2(0.656094, 0.656094)
+texture = ExtResource("6_kp4yr")
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "mash"
+libraries = {
+"": SubResource("AnimationLibrary_2tu48")
+}

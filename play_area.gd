@@ -1,7 +1,7 @@
 extends Node
 
 enum Difficulty {easy1, easy2, easy3, easy4, easy5, hard1, hard2, hard3, hard4, hard5}
-enum Mode {countdown, card, mash}
+enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN}
 
 @export var age: int = 10 ## The age of the player. Debug use only here.
 @export var age_difficulty_cap: int = 8 ## This age and lower only plays easy.
@@ -11,6 +11,9 @@ enum Mode {countdown, card, mash}
 @export var starting_difficulty := Difficulty.easy1 ## Debug only.
 @export_range(1, 10) var difficulty_up_interval: int = 3 ## Harder every n perfect sets.
 @export_range(1, 10) var difficulty_down_interval: int = 1 ## Easier every n botched sets.
+@export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
+@export var mash_interval: int = 3
+@export var mash_multiplier: int = 10 ## Points awards per point of mash score.
 
 
 var positions: Array
@@ -27,16 +30,23 @@ var need_cards: bool = true
 
 
 func _ready():
-	mode = Mode.card
+	mode = Mode.CARD
 	difficulty_level = starting_difficulty
 
 
 func _process(delta):
-	if mode == Mode.card:
+	if mode == Mode.CARD:
 		card_game_loop()
+	if mode == Mode.MASH:
+		mash_game_loop()
+	if mode == Mode.MASH_COOLDOWN:
+		mash_cooldown_loop()
 		
 		
 func card_game_loop() -> void:
+	$MashVisuals.hide()
+	$ButtonBox.reactive()
+	$TargetArrows.show()
 	# Runs when there are no cards or the set of cards is complete.
 	if need_cards:
 		need_cards = false
@@ -64,11 +74,11 @@ func card_game_loop() -> void:
 		
 	show_target_arrow(target)
 	
-	if Input.is_action_just_pressed("debug_animal") and target < cards.size():
+	if Input.is_action_just_pressed("%s_left" % player_num) and target < cards.size():
 		cards[target].answer(Enums.Kind.animal)
 		target += 1
 	
-	if Input.is_action_just_pressed("debug_vegetable") and target < cards.size():
+	if Input.is_action_just_pressed("%s_right" % player_num) and target < cards.size():
 		cards[target].answer(Enums.Kind.vegetable)
 		target += 1
 	
@@ -92,16 +102,35 @@ func card_game_loop() -> void:
 		if failed_set_streak % difficulty_down_interval == 0 and failed_set_streak != 0:
 			decrease_difficulty()
 		
-		print(score)
 		record.clear()
 		cards.clear()
 		target = 0
 		need_cards = true
+		
+		if perfect_set_streak % mash_interval == 0 and perfect_set_streak != 0:
+			mode = Mode.MASH
 
 
 
 func mash_game_loop() -> void:
-	pass
+	$TargetArrows.hide()
+	[$Card1, $Card2, $Card3, $Card4, $Card5].map(func (x): x.hide())
+	if Input.is_action_just_pressed("%s_left" % player_num):
+		$MashVisuals.increase_mash_score()
+	if Input.is_action_just_pressed("%s_right" % player_num):
+		$MashVisuals.increase_mash_score()
+	$ButtonBox.mash()
+	$MashVisuals.show()
+	$MashVisuals.start_timer()
+
+
+func mash_cooldown_loop() -> void:
+	$MashVisuals.hide()
+	$ButtonBox.reactive()
+	if $MashCoolDownTimer.time_left > 0:
+		pass
+	else:
+		$MashCoolDownTimer.start()
 
 
 func deal_set(count: int, difficult: bool=false):
@@ -181,3 +210,17 @@ func _on_card_4_result(value: int):
 func _on_card_5_result(value: int):
 	record.append(value)
 	award_card_points(value)
+
+
+func _on_mash_visuals_mash_complete(mash_score):
+	print("Mash Score: ", mash_score)
+	score += mash_score * mash_multiplier
+	$CongratsAnimation.play("show")
+	$MashCoins.amount = mash_score
+	$MashCoins.emitting = true
+	$MashCoins.restart()
+	mode = Mode.MASH_COOLDOWN
+
+
+func _on_mash_cool_down_timer_timeout():
+	mode = Mode.CARD

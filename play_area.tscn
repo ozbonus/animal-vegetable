@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhqm12i2l1mk3"]
+[gd_scene load_steps=13 format=3 uid="uid://dhqm12i2l1mk3"]
 
-[ext_resource type="Script" path="res://game_test.gd" id="1_op73s"]
+[ext_resource type="Script" path="res://play_area.gd" id="1_vr8wc"]
 [ext_resource type="PackedScene" uid="uid://b5j3xh8o6vjb7" path="res://card.tscn" id="2_7a0j3"]
+[ext_resource type="Texture2D" uid="uid://dsrh8hv3p5ynj" path="res://art/banner11.png" id="2_r1p4o"]
 [ext_resource type="Texture2D" uid="uid://bqtsxypqvqgn7" path="res://art/message_fantastic.png" id="3_6y8j5"]
 [ext_resource type="AudioStream" uid="uid://dajbrjqhd4cfq" path="res://audio/Success5.wav" id="4_msw78"]
 [ext_resource type="PackedScene" uid="uid://8mqeigswc8xo" path="res://target_arrow.tscn" id="5_mwfss"]
+[ext_resource type="PackedScene" uid="uid://dcndxqjr252nt" path="res://button_box.tscn" id="6_fgok2"]
+[ext_resource type="PackedScene" uid="uid://borx3d7ssd3gt" path="res://mash_visuals.tscn" id="7_i7mvp"]
+[ext_resource type="Texture2D" uid="uid://b1n8t1ev6itdl" path="res://art/money_dollar_coin2.png" id="8_esygr"]
 
 [sub_resource type="Animation" id="Animation_f7cgj"]
 length = 0.001
@@ -54,37 +58,34 @@ _data = {
 "show": SubResource("Animation_g6gj7")
 }
 
-[node name="GameTest" type="Node"]
-script = ExtResource("1_op73s")
+[node name="PlayArea" type="Node"]
+script = ExtResource("1_vr8wc")
 difficulty_up_interval = 1
-metadata/_edit_vertical_guides_ = [865.0]
-metadata/_edit_horizontal_guides_ = [87.0, 254.0, 423.0, 590.0, 758.0]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 751.0
-offset_right = 1165.0
-offset_bottom = 1080.0
-color = Color(0.0509804, 0.494118, 1, 1)
-metadata/_edit_lock_ = true
+[node name="Banner11" type="Sprite2D" parent="."]
+position = Vector2(210, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("2_r1p4o")
 
 [node name="Card1" parent="." instance=ExtResource("2_7a0j3")]
-position = Vector2(952, 131)
+position = Vector2(210, 131)
 
 [node name="Card2" parent="." instance=ExtResource("2_7a0j3")]
-position = Vector2(952, 299)
+position = Vector2(210, 299)
 
 [node name="Card3" parent="." instance=ExtResource("2_7a0j3")]
-position = Vector2(952, 467)
+position = Vector2(210, 467)
 
 [node name="Card4" parent="." instance=ExtResource("2_7a0j3")]
-position = Vector2(952, 635)
+position = Vector2(210, 635)
 
 [node name="Card5" parent="." instance=ExtResource("2_7a0j3")]
-position = Vector2(952, 803)
+position = Vector2(210, 803)
 
 [node name="Congrats" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(952, 859)
+position = Vector2(210, 859)
 scale = Vector2(0.525, 0.525)
 texture = ExtResource("3_6y8j5")
 
@@ -98,25 +99,56 @@ libraries = {
 }
 
 [node name="TargetArrows" type="Node2D" parent="."]
-position = Vector2(-16, -8)
 
 [node name="TargetArrow1" parent="TargetArrows" instance=ExtResource("5_mwfss")]
-position = Vector2(865, 87)
+position = Vector2(107, 79)
 
 [node name="TargetArrow2" parent="TargetArrows" instance=ExtResource("5_mwfss")]
-position = Vector2(865, 254)
+position = Vector2(107, 246)
 
 [node name="TargetArrow3" parent="TargetArrows" instance=ExtResource("5_mwfss")]
-position = Vector2(865, 423)
+position = Vector2(107, 415)
 
 [node name="TargetArrow4" parent="TargetArrows" instance=ExtResource("5_mwfss")]
-position = Vector2(865, 590)
+position = Vector2(107, 582)
 
 [node name="TargetArrow5" parent="TargetArrows" instance=ExtResource("5_mwfss")]
-position = Vector2(865, 758)
+position = Vector2(107, 750)
+
+[node name="ButtonBox" parent="." instance=ExtResource("6_fgok2")]
+position = Vector2(211, 980)
+scale = Vector2(1.21711, 1.21711)
+
+[node name="MashVisuals" parent="." instance=ExtResource("7_i7mvp")]
+position = Vector2(-40, 278)
+
+[node name="MashCoins" type="CPUParticles2D" parent="."]
+position = Vector2(212, 509)
+emitting = false
+amount = 30
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("8_esygr")
+direction = Vector2(2.08165e-12, -1)
+spread = 103.33
+gravity = Vector2(2.08165e-12, 2700)
+initial_velocity_min = 342.6
+initial_velocity_max = 814.82
+angular_velocity_min = 53.33
+angular_velocity_max = 93.33
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="MashCoolDownTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="result" from="Card1" to="." method="_on_card_1_result"]
 [connection signal="result" from="Card2" to="." method="_on_card_2_result"]
 [connection signal="result" from="Card3" to="." method="_on_card_3_result"]
 [connection signal="result" from="Card4" to="." method="_on_card_4_result"]
 [connection signal="result" from="Card5" to="." method="_on_card_5_result"]
+[connection signal="mash_complete" from="MashVisuals" to="." method="_on_mash_visuals_mash_complete"]
+[connection signal="timeout" from="MashCoolDownTimer" to="." method="_on_mash_cool_down_timer_timeout"]
+
+[editable path="MashVisuals"]

@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://borx3d7ssd3gt"]
+
+[ext_resource type="Script" path="res://mash_visuals.gd" id="1_ld3dq"]
+[ext_resource type="Shader" path="res://perry_glasses.gdshader" id="2_a85kj"]
+[ext_resource type="LabelSettings" uid="uid://bo5wy00ou800" path="res://labels/p1_age.tres" id="3_bv4g7"]
+[ext_resource type="Texture2D" uid="uid://cihuqbjpm5ie6" path="res://art/stopwatch.png" id="4_5lqpk"]
+[ext_resource type="Texture2D" uid="uid://dpsk05gdbj44t" path="res://art/arrow_color02_increase.png" id="5_rjcvn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aql32"]
+shader = ExtResource("2_a85kj")
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = null
+
+[sub_resource type="Animation" id="Animation_1ucrs"]
+resource_name = "rotate_arrow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-4.71239, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ke8s"]
+_data = {
+"rotate_arrow": SubResource("Animation_1ucrs")
+}
+
+[node name="MashVisuals" type="Node2D"]
+script = ExtResource("1_ld3dq")
+
+[node name="Stopwatch" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_aql32")
+position = Vector2(429, 82.6667)
+scale = Vector2(0.458333, 0.458333)
+texture = ExtResource("4_5lqpk")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(427, 106.333)
+rotation = 1.5708
+scale = Vector2(0.104261, 0.104261)
+texture = ExtResource("5_rjcvn")
+offset = Vector2(-206.212, 2.58728)
+
+[node name="Score" type="CenterContainer" parent="."]
+offset_left = -111.0
+offset_top = -12.0
+offset_right = 609.0
+offset_bottom = 512.0
+
+[node name="Label" type="Label" parent="Score"]
+layout_mode = 2
+text = "23"
+label_settings = ExtResource("3_bv4g7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowAnimator" type="AnimationPlayer" parent="."]
+speed_scale = 0.3
+libraries = {
+"": SubResource("AnimationLibrary_3ke8s")
+}
+
+[connection signal="animation_finished" from="ArrowAnimator" to="." method="_on_arrow_animator_animation_finished"]
