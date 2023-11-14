@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 enum Difficulty {easy1, easy2, easy3, easy4, easy5, hard1, hard2, hard3, hard4, hard5}
 enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN}
@@ -30,7 +30,7 @@ var need_cards: bool = true
 
 
 func _ready():
-	mode = Mode.COUNTDOWN
+	mode = Mode.CARD
 	difficulty_level = starting_difficulty
 
 

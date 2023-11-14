@@ -1,3 +1,41 @@
-[gd_scene format=3 uid="uid://c4upxjmundnn3"]
+[gd_scene load_steps=5 format=3 uid="uid://c4upxjmundnn3"]
+
+[ext_resource type="PackedScene" uid="uid://dhqm12i2l1mk3" path="res://play_area.tscn" id="1_ixv42"]
+[ext_resource type="Texture2D" uid="uid://di8dp50u5stut" path="res://art/banner05.png" id="2_s67xl"]
+[ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="3_4au25"]
+[ext_resource type="Texture2D" uid="uid://chhkt30l2vt4b" path="res://art/banner06.png" id="4_wahlu"]
 
 [node name="PlayScreen" type="Node"]
+
+[node name="P1PlayArea" parent="." instance=ExtResource("1_ixv42")]
+position = Vector2(27, 0)
+
+[node name="P2PlayArea" parent="." instance=ExtResource("1_ixv42")]
+position = Vector2(509, 0)
+player_num = "p2"
+
+[node name="Banner11" parent="P2PlayArea" index="0"]
+texture = ExtResource("2_s67xl")
+
+[node name="P3PlayArea" parent="." instance=ExtResource("1_ixv42")]
+position = Vector2(999, 0)
+player_num = "p3"
+
+[node name="Banner11" parent="P3PlayArea" index="0"]
+texture = ExtResource("3_4au25")
+
+[node name="P4PlayArea" parent="." instance=ExtResource("1_ixv42")]
+position = Vector2(1465, 0)
+player_num = "p4"
+
+[node name="Banner11" parent="P4PlayArea" index="0"]
+texture = ExtResource("4_wahlu")
+
+[editable path="P1PlayArea"]
+[editable path="P1PlayArea/MashVisuals"]
+[editable path="P2PlayArea"]
+[editable path="P2PlayArea/MashVisuals"]
+[editable path="P3PlayArea"]
+[editable path="P3PlayArea/MashVisuals"]
+[editable path="P4PlayArea"]
+[editable path="P4PlayArea/MashVisuals"]

@@ -58,7 +58,7 @@ _data = {
 "show": SubResource("Animation_g6gj7")
 }
 
-[node name="PlayArea" type="Node"]
+[node name="PlayArea" type="Node2D"]
 script = ExtResource("1_vr8wc")
 difficulty_up_interval = 1
 
