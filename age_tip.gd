@@ -1,6 +1,6 @@
 extends Node2D
 
-@export_range(0, 1.5) var seek_delay: float = 0.0
+@export_range(0.0, 2.0, 0.1) var seek_delay: float = 0.0
 
 
 func _ready():

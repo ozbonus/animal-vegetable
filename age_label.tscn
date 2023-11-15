@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfinwfjcsn0jv"]
+
+[ext_resource type="LabelSettings" uid="uid://bo5wy00ou800" path="res://labels/p1_age.tres" id="1_b2vpj"]
+[ext_resource type="Script" path="res://age_label.gd" id="1_bnsai"]
+[ext_resource type="AudioStream" uid="uid://e55tvg6x14sd" path="res://audio/OpenOrEnable2.wav" id="3_g45xs"]
+[ext_resource type="AudioStream" uid="uid://bw32cw3f1eujp" path="res://audio/CloseOrDisable2.wav" id="4_63qmh"]
+
+[sub_resource type="Animation" id="Animation_gnssf"]
+resource_name = "jiggle"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.3), Vector2(1, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dhjs6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ct607"]
+_data = {
+"RESET": SubResource("Animation_dhjs6"),
+"jiggle": SubResource("Animation_gnssf")
+}
+
+[node name="AgeLabel" type="Node2D"]
+script = ExtResource("1_bnsai")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 372.0
+offset_bottom = 263.0
+scale = Vector2(1, 0.9)
+pivot_offset = Vector2(186, 113.5)
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "8"
+label_settings = ExtResource("1_b2vpj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 1.3
+libraries = {
+"": SubResource("AnimationLibrary_ct607")
+}
+
+[node name="ScrambleTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ScrambleSubTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="AgeUpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_g45xs")
+
+[node name="AgeDownSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_63qmh")
+
+[connection signal="timeout" from="ScrambleTimer" to="." method="_on_scramble_timer_timeout"]
+[connection signal="timeout" from="ScrambleSubTimer" to="." method="_on_scramble_sub_timer_timeout"]

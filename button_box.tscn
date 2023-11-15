@@ -118,12 +118,14 @@ animation = &"flutter"
 centered = false
 
 [node name="LeftHand" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-98, -35)
 rotation = 2.87979
 scale = Vector2(0.656094, 0.656094)
 texture = ExtResource("6_kp4yr")
 
 [node name="RightHand" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(98, -35)
 rotation = -2.87979
 scale = Vector2(0.656094, 0.656094)
