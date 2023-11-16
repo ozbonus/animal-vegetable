@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7dngkd4sttge"]
+[gd_scene load_steps=9 format=3 uid="uid://c7dngkd4sttge"]
 
-[ext_resource type="Shader" path="res://perry.gdshader" id="1_4sha5"]
 [ext_resource type="Texture2D" uid="uid://b72n1mn0uy8ne" path="res://art/fruit_bergamot_yellow.png" id="1_h3aqe"]
 [ext_resource type="Texture2D" uid="uid://clssoi13rr1bb" path="res://art/megane_eye1_frame.png" id="2_regw5"]
 [ext_resource type="Shader" path="res://perry_glasses.gdshader" id="3_ext6c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7tlcn"]
-shader = ExtResource("1_4sha5")
+shader = ExtResource("3_ext6c")
 shader_parameter/outline_width = 5.0
 shader_parameter/outline_color = null
 

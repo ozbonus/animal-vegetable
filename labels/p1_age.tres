@@ -4,6 +4,6 @@
 
 [resource]
 font = ExtResource("1_wepva")
-font_size = 300
-outline_size = 55
-outline_color = Color(0.361784, 1.5208e-07, 0.177305, 1)
+font_size = 220
+outline_size = 48
+outline_color = Color(0.305882, 0, 0.145098, 1)

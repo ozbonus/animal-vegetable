@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4upxjmundnn3"]
+[gd_scene load_steps=7 format=3 uid="uid://c4upxjmundnn3"]
 
+[ext_resource type="Script" path="res://play_screen.gd" id="1_fi8ra"]
 [ext_resource type="PackedScene" uid="uid://dhqm12i2l1mk3" path="res://play_area.tscn" id="1_ixv42"]
 [ext_resource type="Texture2D" uid="uid://di8dp50u5stut" path="res://art/banner05.png" id="2_s67xl"]
 [ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="3_4au25"]
@@ -7,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ckbf8rkan17s7" path="res://attract_background.tscn" id="5_sik6u"]
 
 [node name="PlayScreen" type="Node"]
+script = ExtResource("1_fi8ra")
 
 [node name="P1PlayArea" parent="." instance=ExtResource("1_ixv42")]
 position = Vector2(27, 0)
@@ -18,6 +20,9 @@ player_num = "p2"
 [node name="Banner11" parent="P2PlayArea" index="0"]
 texture = ExtResource("2_s67xl")
 
+[node name="ButtonBox" parent="P2PlayArea" index="9"]
+player_num = "p2"
+
 [node name="P3PlayArea" parent="." instance=ExtResource("1_ixv42")]
 position = Vector2(999, 0)
 player_num = "p3"
@@ -25,12 +30,18 @@ player_num = "p3"
 [node name="Banner11" parent="P3PlayArea" index="0"]
 texture = ExtResource("3_4au25")
 
+[node name="ButtonBox" parent="P3PlayArea" index="9"]
+player_num = "p3"
+
 [node name="P4PlayArea" parent="." instance=ExtResource("1_ixv42")]
 position = Vector2(1465, 0)
 player_num = "p4"
 
 [node name="Banner11" parent="P4PlayArea" index="0"]
 texture = ExtResource("4_wahlu")
+
+[node name="ButtonBox" parent="P4PlayArea" index="9"]
+player_num = "p4"
 
 [node name="AttractBackground" parent="." instance=ExtResource("5_sik6u")]
 
