@@ -45,19 +45,24 @@ func p4_adjust_age(value: int):
 	print("Player 4 age: %s" % p4_age)
 
 
-func add_p1_score(points: int):
+func add_p1_points(points: int):
 	p1_score += points
 	print_score_message(1, points, p1_score)
 
 
-func add_p2_score(points: int):
+func add_p2_points(points: int):
 	p2_score += points
 	print_score_message(2, points, p2_score)
 
 
-func add_p3_score(points: int):
+func add_p3_points(points: int):
 	p3_score += points
 	print_score_message(3, points, p3_score)
+
+
+func add_p4_points(points: int):
+	p4_score += points
+	print_score_message(4, points, p4_score)
 
 
 func reset_ages() -> void:
