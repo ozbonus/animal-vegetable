@@ -39,7 +39,8 @@ func scramble() -> void:
 
 func _on_scramble_timer_timeout():
 	$ScrambleSubTimer.stop()
-	$CenterContainer/Label.text = str(default_age)
+	age = default_age
+	$CenterContainer/Label.text = str(age)
 
 
 func _on_scramble_sub_timer_timeout():

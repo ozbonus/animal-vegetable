@@ -6,10 +6,6 @@ var p1_active: bool = ActivePlayersRepository.p1_active
 var p2_active: bool = ActivePlayersRepository.p2_active
 var p3_active: bool = ActivePlayersRepository.p3_active
 var p4_active: bool = ActivePlayersRepository.p4_active
-var p1_age: int = 8
-var p2_age: int = 8
-var p3_age: int = 8
-var p4_age: int = 8
 
 
 func _ready():
@@ -33,25 +29,33 @@ func _process(delta):
 	if p1_active or debug:
 		if Input.is_action_just_pressed("p1_left"):
 			$P1Content/AgeLabel.adjust_age(-1)
+			PlayerRepository.p1_adjust_age(-1)
 		if Input.is_action_just_pressed("p1_right"):
 			$P1Content/AgeLabel.adjust_age(1)
+			PlayerRepository.p1_adjust_age(1)
 
 	if p2_active or debug:
 		if Input.is_action_just_pressed("p2_left"):
 			$P2Content/AgeLabel.adjust_age(-1)
+			PlayerRepository.p2_adjust_age(-1)
 		if Input.is_action_just_pressed("p2_right"):
 			$P2Content/AgeLabel.adjust_age(1)
+			PlayerRepository.p2_adjust_age(1)
 
 	if p3_active or debug:
 		if Input.is_action_just_pressed("p3_left"):
 			$P3Content/AgeLabel.adjust_age(-1)
+			PlayerRepository.p3_adjust_age(-1)
 		if Input.is_action_just_pressed("p3_right"):
 			$P3Content/AgeLabel.adjust_age(1)
+			PlayerRepository.p3_adjust_age(1)
 
-	if p3_active or debug:
+	if p4_active or debug:
 		if Input.is_action_just_pressed("p4_left"):
 			$P4Content/AgeLabel.adjust_age(-1)
+			PlayerRepository.p4_adjust_age(-1)
 		if Input.is_action_just_pressed("p4_right"):
 			$P4Content/AgeLabel.adjust_age(1)
+			PlayerRepository.p4_adjust_age(1)
 
 
