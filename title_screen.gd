@@ -1,14 +1,23 @@
 extends Node
 
 
+var can_proceed: bool
+
+
 func _ready():
 	ActivePlayersRepository.reset()
 	PlayerRepository.reset()
 	$BannerAnimation.play("RESET")
+	MusicService.play_title_music()
 	
 
 func _process(delta):
-	if Input.is_action_pressed("next_screen"):
+	can_proceed = ActivePlayersRepository.p1_active \
+		or ActivePlayersRepository.p2_active \
+		or ActivePlayersRepository.p3_active \
+		or ActivePlayersRepository.p4_active
+	
+	if Input.is_action_pressed("next_screen") and can_proceed:
 		ScreenTransition.change_screen("res://age_screen.tscn")
 	if Input.is_action_just_pressed("command_1"):
 		p1_toggle_active()
