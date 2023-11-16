@@ -9,6 +9,7 @@ var p4_active: bool = ActivePlayersRepository.p4_active
 
 
 func _ready():
+	MusicService.play_gameplay_music(1.0)
 	PlayerRepository.reset_scores()
 	if !p1_active and !debug:
 		$P1PlayArea.queue_free()

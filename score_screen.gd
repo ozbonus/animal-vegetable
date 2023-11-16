@@ -3,6 +3,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	MusicService.play_title_music(1.0)
 	$P1Points.text = str(PlayerRepository.p1_score)
 	$P2Points.text = str(PlayerRepository.p2_score)
 	$P3Points.text = str(PlayerRepository.p3_score)

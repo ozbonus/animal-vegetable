@@ -24,7 +24,7 @@ func _process(delta):
 		ScreenTransition.change_screen("res://title_screen.tscn")
 	
 	if Input.is_action_just_pressed("next_screen"):
-		ScreenTransition.change_screen("res://play_screen.tscn")
+		ScreenTransition.change_screen("res://tutorial_screen.tscn")
 	
 	if p1_active or debug:
 		if Input.is_action_just_pressed("p1_left"):

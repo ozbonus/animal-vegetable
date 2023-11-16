@@ -22,6 +22,7 @@ ActivePlayersRepository="*res://data/active_players_repository.gd"
 PlayerRepository="*res://data/player_repository.gd"
 ScreenTransition="*res://screen_transition.tscn"
 Enums="*res://enums.gd"
+MusicService="*res://applcation/music_service.tscn"
 
 [display]
 
