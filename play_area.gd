@@ -1,19 +1,34 @@
 extends Node2D
 
-enum Difficulty {easy1, easy2, easy3, easy4, easy5, hard1, hard2, hard3, hard4, hard5}
+
+enum Difficulty {
+	EASY_1, EASY_2, EASY_3, EASY_4, EASY_5,
+	MEDI_1, MEDI_2, MEDI_3, MEDI_4, MEDI_5,
+	HARD_1, HARD_2, HARD_3, HARD_4, HARD_5
+}
 enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN}
 
+
+
+@export var debug: bool = false
 @export var age: int = 10 ## The age of the player. Debug use only here.
-@export var age_difficulty_cap: int = 8 ## This age and lower only plays easy.
+@export var easy_difficulty_cap: int = 8 ## This age and lower only plays easy.
+@export var medium_difficulty_cap: int = 10 ## This age is limited to medium.
 @export var base_card_points: int = 100 ## Points for one correct answer.
 @export var card_age_bonus: int = 10 ## Bonus per year under 14.
 @export var set_bonus: int = 200 ## Points for a perfect set of answers.
-@export var starting_difficulty := Difficulty.easy1 ## Debug only.
+@export var starting_difficulty := Difficulty.EASY_1 ## Debug only.
 @export_range(1, 10) var difficulty_up_interval: int = 3 ## Harder every n perfect sets.
 @export_range(1, 10) var difficulty_down_interval: int = 1 ## Easier every n botched sets.
 @export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
-@export var mash_interval: int = 3
+@export var mash_interval: int = 3 ## Mash minigame every n perfect sets.
 @export var mash_multiplier: int = 10 ## Points awards per point of mash score.
+
+
+var p1_active: bool = ActivePlayersRepository.p1_active
+var p2_active: bool = ActivePlayersRepository.p2_active
+var p3_active: bool = ActivePlayersRepository.p3_active
+var p4_active: bool = ActivePlayersRepository.p4_active
 
 
 var positions: Array
@@ -33,8 +48,20 @@ var need_mode_setup = true
 func _ready():
 	mode = Mode.CARD
 	difficulty_level = starting_difficulty
-
-
+	if debug:
+		pass
+	else:
+		match player_num:
+			"p1":
+				age = PlayerRepository.p1_age
+			"p2":
+				age = PlayerRepository.p2_age
+			"p3":
+				age = PlayerRepository.p3_age
+			"p4":
+				age = PlayerRepository.p4_age
+			
+			
 func _process(delta):
 	if mode == Mode.COUNTDOWN:
 		countdown_loop()
@@ -65,26 +92,36 @@ func card_game_loop() -> void:
 	if need_cards:
 		need_cards = false
 		match difficulty_level:
-			Difficulty.easy1:
+			Difficulty.EASY_1:
 				deal_set(1)
-			Difficulty.easy2:
+			Difficulty.EASY_2:
 				deal_set(2)
-			Difficulty.easy3:
+			Difficulty.EASY_3:
 				deal_set(3)
-			Difficulty.easy4:
+			Difficulty.EASY_4:
 				deal_set(4)
-			Difficulty.easy5:
+			Difficulty.EASY_5:
 				deal_set(5)
-			Difficulty.hard1:
-				deal_set(1, true)
-			Difficulty.hard2:
-				deal_set(2, true)
-			Difficulty.hard3:
-				deal_set(3, true)
-			Difficulty.hard4:
-				deal_set(4, true)
-			Difficulty.hard5:
-				deal_set(5, true)
+			Difficulty.MEDI_1:
+				deal_set(1, true, false)
+			Difficulty.MEDI_2:
+				deal_set(2, true, false)
+			Difficulty.MEDI_3:
+				deal_set(3, true, false)
+			Difficulty.MEDI_4:
+				deal_set(4, true, false)
+			Difficulty.MEDI_5:
+				deal_set(5, true, false)			
+			Difficulty.HARD_1:
+				deal_set(1, false, true)
+			Difficulty.HARD_2:
+				deal_set(2, false, true)
+			Difficulty.HARD_3:
+				deal_set(3, false, true)
+			Difficulty.HARD_4:
+				deal_set(4, false, true)
+			Difficulty.HARD_5:
+				deal_set(5, false, true)
 		
 	show_target_arrow(target)
 	
@@ -120,7 +157,6 @@ func card_game_loop() -> void:
 		cards.clear()
 		target = 0
 		need_cards = true
-		print(score)
 		
 		if perfect_set_streak % mash_interval == 0 and perfect_set_streak != 0:
 			need_mode_setup = true
@@ -153,11 +189,11 @@ func mash_cooldown_loop() -> void:
 		$MashCoolDownTimer.start()
 
 
-func deal_set(count: int, difficult: bool=false):
+func deal_set(count: int, medium := false, difficult := false):
 	assert(0 < count and count < 6)
 	var index := 0
 	for card in [$Card1, $Card2, $Card3, $Card4, $Card5].slice(0, count):
-		card.appear(index, difficult)
+		card.appear(index, medium, difficult)
 		cards.append(card)
 		index += 1
 
@@ -170,12 +206,42 @@ func show_target_arrow(index: int):
 func award_card_points(value: int) -> void:
 	var points: int = value * base_card_points
 	var bonus: int = card_age_bonus * (14 - age)
+	match player_num:
+		"p1":
+			PlayerRepository.add_p1_points(points)
+		"p2":
+			PlayerRepository.add_p2_points(points)
+		"p3":
+			PlayerRepository.add_p3_points(points)
+		"p4":
+			PlayerRepository.add_p4_points(points)
 	score += points + bonus
 
 
 func award_set_points() -> void:
 	if record.count(0) == 0:
-		score += set_bonus * (difficulty_level + 1)
+		match player_num:
+			"p1":
+				PlayerRepository.add_p1_points(set_bonus)
+			"p2":
+				PlayerRepository.add_p2_points(set_bonus)
+			"p3":
+				PlayerRepository.add_p3_points(set_bonus)
+			"p4":
+				PlayerRepository.add_p4_points(set_bonus)
+
+
+func award_mash_points(value: int) -> void:
+	var points: int = value * mash_multiplier
+	match player_num:
+		"p1":
+			PlayerRepository.add_p1_points(points)
+		"p2":
+			PlayerRepository.add_p2_points(points)
+		"p3":
+			PlayerRepository.add_p3_points(points)
+		"p4":
+			PlayerRepository.add_p4_points(points)
 
 
 func maybe_congratulations() -> void:
@@ -195,9 +261,11 @@ func maybe_congratulations() -> void:
 
 
 func increase_difficulty() -> void:
-	var max_difficulty: int = Difficulty.hard5
-	if age <= age_difficulty_cap:
-		max_difficulty = Difficulty.easy5
+	var max_difficulty: int = Difficulty.HARD_5
+	if age <= easy_difficulty_cap:
+		max_difficulty = Difficulty.EASY_5
+	elif age <= medium_difficulty_cap:
+		max_difficulty = Difficulty.MEDI_5
 	var new_difficulty: int = clamp(difficulty_level + 1, 0, max_difficulty)
 	difficulty_level = new_difficulty
 
@@ -234,7 +302,7 @@ func _on_card_5_result(value: int):
 
 func _on_mash_visuals_mash_complete(mash_score):
 	print("Mash Score: ", mash_score)
-	score += mash_score * mash_multiplier * 2
+	award_mash_points(mash_score)
 	$CongratsAnimation.play("show")
 	$MashCoins.amount = mash_score
 	$MashCoins.emitting = true

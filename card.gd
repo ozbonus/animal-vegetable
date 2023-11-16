@@ -1,15 +1,29 @@
 extends Node2D
 
+
 var card_kind: Enums.Kind
 var easy_cards: Array[String] = [
-	"res://cards/ani01.png",
-	"res://cards/ani02.png",
-	"res://cards/ani03.png",
-	"res://cards/ani04.png",
-	"res://cards/veg01.png",
-	"res://cards/veg02.png",
-	"res://cards/veg03.png",
-	"res://cards/veg04.png",
+	"res://cards/e_ani01.png",
+	"res://cards/e_ani02.png",
+	"res://cards/e_ani03.png",
+	"res://cards/e_ani04.png",
+	"res://cards/e_veg01.png",
+	"res://cards/e_veg02.png",
+	"res://cards/e_veg03.png",
+	"res://cards/e_veg04.png",
+]
+var medium_cards: Array[String] = [
+	"res://cards/m_ani01.png",
+	"res://cards/m_ani02.png",
+	"res://cards/m_ani03.png",
+	"res://cards/m_ani04.png",
+	"res://cards/m_ani05.png",
+	"res://cards/m_ani05.png",
+	"res://cards/m_veg01.png",
+	"res://cards/m_veg02.png",
+	"res://cards/m_veg03.png",
+	"res://cards/m_veg04.png",
+	"res://cards/m_veg05.png",
 ]
 var hard_cards: Array[String] = [
 	"res://cards/h_ani01.png",
@@ -24,6 +38,7 @@ var hard_cards: Array[String] = [
 	"res://cards/h_veg05.png",
 ]
 
+
 signal correct
 signal mistake
 signal result
@@ -33,17 +48,15 @@ func _ready():
 	hide()
 
 
-func _process(delta):
-	pass
-
-
-func appear(index: int, difficult: bool=false) -> void:
+func appear(index: int, medium := false, hard:= true) -> void:
 	var random_texture: String
 	
-	if !difficult:
-		random_texture = easy_cards[randi() % easy_cards.size()]
+	if hard:
+		random_texture = hard_cards[randi() % easy_cards.size()]
+	elif medium:
+		random_texture = medium_cards[randi() % hard_cards.size()]
 	else:
-		random_texture = hard_cards[randi() % hard_cards.size()]
+		random_texture = easy_cards[randi() % easy_cards.size()]
 		
 	if random_texture.contains("ani"):
 		card_kind = Enums.Kind.animal

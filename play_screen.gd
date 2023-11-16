@@ -22,4 +22,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("previous_screen"):
+		ScreenTransition.change_screen("res://age_screen.tscn")
+	
+	if Input.is_action_just_pressed("next_screen"):
+		ScreenTransition.change_screen("res://score_screen.tscn")
+	
