@@ -13,7 +13,7 @@ enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN}
 @export_category("Debug")
 @export var debug: bool = false
 @export var starting_difficulty := Difficulty.EASY_1 ## Debug only.
-@export var age: int = 10 ## The age of the player. Debug use only here.
+@export_range(5, 14) var age: int = 10 ## The age of the player. Debug use only here.
 @export_category("Difficulty")
 @export var easy_difficulty_cap: int = 8 ## This age and lower only plays easy.
 @export var medium_difficulty_cap: int = 10 ## This age is limited to medium.
@@ -213,7 +213,7 @@ func award_card_points(correct: bool) -> void:
 		# 14 is the maximum age that can be entered on the age screen.
 		points = base_card_points + (card_age_bonus * (14 - age))
 	else:
-		points = penalty
+		points = penalty * (difficulty_level + 1)
 	match player_num:
 		"p1":
 			PlayerRepository.add_p1_points(points)
