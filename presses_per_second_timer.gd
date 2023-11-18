@@ -26,7 +26,7 @@ func reset() -> void:
 	presses_per_second = 0
 
 
-func reset_and_stop() -> void:
+func stop_and_reset() -> void:
 	stop()
 	reset()
 
