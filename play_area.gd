@@ -6,22 +6,27 @@ enum Difficulty {
 	MEDI_1, MEDI_2, MEDI_3, MEDI_4, MEDI_5,
 	HARD_1, HARD_2, HARD_3, HARD_4, HARD_5
 }
-enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN}
+enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN, FLAIL_COOLDOWN}
 
 
-
+@export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
+@export_category("Debug")
 @export var debug: bool = false
-@export var age: int = 10 ## The age of the player. Debug use only here.
+@export var starting_difficulty := Difficulty.EASY_1 ## Debug only.
+@export_range(5, 14) var age: int = 10 ## The age of the player. Debug use only here.
+@export_category("Difficulty")
 @export var easy_difficulty_cap: int = 8 ## This age and lower only plays easy.
 @export var medium_difficulty_cap: int = 10 ## This age is limited to medium.
-@export var base_card_points: int = 100 ## Points for one correct answer.
-@export var card_age_bonus: int = 10 ## Bonus per year under 14.
-@export var set_bonus: int = 200 ## Points for a perfect set of answers.
-@export var starting_difficulty := Difficulty.EASY_1 ## Debug only.
 @export_range(1, 10) var difficulty_up_interval: int = 3 ## Harder every n perfect sets.
 @export_range(1, 10) var difficulty_down_interval: int = 1 ## Easier every n botched sets.
-@export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
-@export var mash_interval: int = 3 ## Mash minigame every n perfect sets.
+@export_range(0, 10, 0.1) var flail_cooldown_threshold = 4.0 ## More the n presses per second leads to a cooldown timer.
+@export_range(0, 5, 0.1) var flail_cooldown_length = 3.0 ## Delay card deal for n seconds.
+@export_category("Points")
+@export var base_card_points: int = 100 ## Points for one correct answer.
+@export_range(-1000, 0, 10) var penalty: int = -100 ## Points lost per wrong answer.
+@export var card_age_bonus: int = 10 ## Bonus per year under 14.
+@export var set_bonus: int = 200 ## Points for a perfect set of answers.
+@export var mash_interval: int = 3 ## Mash minigame every n perfect sets. 
 @export var mash_multiplier: int = 10 ## Points awards per point of mash score.
 
 
@@ -34,7 +39,7 @@ var p4_active: bool = ActivePlayersRepository.p4_active
 var positions: Array
 var hand: Array
 var cards: Array
-var record: Array
+var record: Array[bool]
 var target: int = 0
 var difficulty_level: Difficulty
 var score: int = 0
@@ -46,6 +51,7 @@ var need_mode_setup = true
 
 
 func _ready():
+	$FlailCooldownTimer.wait_time = flail_cooldown_length
 	mode = Mode.CARD
 	difficulty_level = starting_difficulty
 	if debug:
@@ -71,6 +77,8 @@ func _process(delta):
 		mash_game_loop()
 	if mode == Mode.MASH_COOLDOWN:
 		mash_cooldown_loop()
+	if mode == Mode.FLAIL_COOLDOWN:
+		flail_cooldown_loop()
 
 
 func countdown_loop():
@@ -91,6 +99,8 @@ func card_game_loop() -> void:
 	# Runs when there are no cards or the set of cards is complete.
 	if need_cards:
 		need_cards = false
+		if difficulty_level > Difficulty.EASY_2:
+			$PressesPerSecondTimer.start()
 		match difficulty_level:
 			Difficulty.EASY_1:
 				deal_set(1)
@@ -128,21 +138,23 @@ func card_game_loop() -> void:
 	if Input.is_action_just_pressed("%s_left" % player_num) and target < cards.size():
 		cards[target].answer(Enums.Kind.animal)
 		target += 1
+		$PressesPerSecondTimer.press()
 	
 	if Input.is_action_just_pressed("%s_right" % player_num) and target < cards.size():
 		cards[target].answer(Enums.Kind.vegetable)
 		target += 1
+		$PressesPerSecondTimer.press()
 	
 	# Runs when the set of cards is complete.
 	if target >= cards.size():
 		maybe_congratulations()
 		award_set_points()
 		
-		if record.count(0) == 0:
+		if record.count(false) == 0:
 			perfect_set_streak += 1
 		else: perfect_set_streak = 0
 		
-		if record.count(0) > record.count(1):
+		if record.count(false) > record.count(true):
 			failed_set_streak += 1
 		else:
 			failed_set_streak = 0
@@ -157,6 +169,12 @@ func card_game_loop() -> void:
 		cards.clear()
 		target = 0
 		need_cards = true
+		var need_flail_cooldown: bool = $PressesPerSecondTimer.presses_per_second > flail_cooldown_threshold
+		$PressesPerSecondTimer.stop_and_reset()
+		
+		if need_flail_cooldown:
+			need_mode_setup = true
+			mode = Mode.FLAIL_COOLDOWN
 		
 		if perfect_set_streak % mash_interval == 0 and perfect_set_streak != 0:
 			need_mode_setup = true
@@ -189,6 +207,23 @@ func mash_cooldown_loop() -> void:
 		$MashCoolDownTimer.start()
 
 
+func flail_cooldown_loop() -> void:
+	if need_mode_setup:
+		print("PUNISH!")
+		$TargetArrows.hide()
+		need_mode_setup = false
+	if $FlailCooldownTimer.time_left > 0:
+		if Input.is_action_just_pressed("%s_left" % player_num):
+			$FlailCooldownTimer.start()
+		
+		if Input.is_action_just_pressed("%s_right" % player_num):
+			$FlailCooldownTimer.start()
+	else:
+		$FlailCooldownTimer.start()
+	
+	
+
+
 func deal_set(count: int, medium := false, difficult := false):
 	assert(0 < count and count < 6)
 	var index := 0
@@ -203,9 +238,14 @@ func show_target_arrow(index: int):
 	$TargetArrows.get_children()[index].show()
 
 
-func award_card_points(value: int) -> void:
-	var points: int = value * base_card_points
-	var bonus: int = card_age_bonus * (14 - age)
+func award_card_points(correct: bool) -> void:
+
+	var points: int
+	if correct:
+		# 14 is the maximum age that can be entered on the age screen.
+		points = base_card_points + (card_age_bonus * (14 - age))
+	else:
+		points = penalty * (difficulty_level + 1)
 	match player_num:
 		"p1":
 			PlayerRepository.add_p1_points(points)
@@ -215,20 +255,20 @@ func award_card_points(value: int) -> void:
 			PlayerRepository.add_p3_points(points)
 		"p4":
 			PlayerRepository.add_p4_points(points)
-	score += points + bonus
 
 
 func award_set_points() -> void:
-	if record.count(0) == 0:
+	if record.count(false) == 0:
+		var points: int = set_bonus * clamp(difficulty_level, 1, 5)
 		match player_num:
 			"p1":
-				PlayerRepository.add_p1_points(set_bonus)
+				PlayerRepository.add_p1_points(points)
 			"p2":
-				PlayerRepository.add_p2_points(set_bonus)
+				PlayerRepository.add_p2_points(points)
 			"p3":
-				PlayerRepository.add_p3_points(set_bonus)
+				PlayerRepository.add_p3_points(points)
 			"p4":
-				PlayerRepository.add_p4_points(set_bonus)
+				PlayerRepository.add_p4_points(points)
 
 
 func award_mash_points(value: int) -> void:
@@ -245,7 +285,7 @@ func award_mash_points(value: int) -> void:
 
 
 func maybe_congratulations() -> void:
-	if record.count(0) == 0:
+	if record.count(false) == 0:
 		var messages: Array[String] = [
 			"res://art/message_fantastic.png",
 			"res://art/message_good_job.png",
@@ -275,27 +315,27 @@ func decrease_difficulty() -> void:
 	difficulty_level = new_difficulty
 
 
-func _on_card_1_result(value: int):
+func _on_card_1_result(value: bool):
 	record.append(value)
 	award_card_points(value)
 
 
-func _on_card_2_result(value: int):
+func _on_card_2_result(value: bool):
 	record.append(value)
 	award_card_points(value)
 
 
-func _on_card_3_result(value: int):
+func _on_card_3_result(value: bool):
 	record.append(value)
 	award_card_points(value)
 
 
-func _on_card_4_result(value: int):
+func _on_card_4_result(value: bool):
 	record.append(value)
 	award_card_points(value)
 	
 
-func _on_card_5_result(value: int):
+func _on_card_5_result(value: bool):
 	record.append(value)
 	award_card_points(value)
 
@@ -311,5 +351,10 @@ func _on_mash_visuals_mash_complete(mash_score):
 
 
 func _on_mash_cool_down_timer_timeout():
+	need_mode_setup = true
+	mode = Mode.CARD
+
+
+func _on_flail_cooldown_timer_timeout():
 	need_mode_setup = true
 	mode = Mode.CARD

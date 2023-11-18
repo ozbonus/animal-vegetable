@@ -77,7 +77,7 @@ func answer(answer_kind: Enums.Kind) -> void:
 
 
 func disappear_correct() -> void:
-	result.emit(1)
+	result.emit(true)
 	$CorrectSound.play()
 	$Coins.emitting = true
 	$Coins.restart()
@@ -87,7 +87,7 @@ func disappear_correct() -> void:
 
 
 func disappear_mistake() -> void:
-	result.emit(0)
+	result.emit(false)
 	$MistakeSound.play()
 	$Explosion.emitting = true
 	$Explosion.restart()
