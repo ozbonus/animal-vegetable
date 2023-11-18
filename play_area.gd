@@ -227,15 +227,16 @@ func award_card_points(correct: bool) -> void:
 
 func award_set_points() -> void:
 	if record.count(false) == 0:
+		var points: int = set_bonus * clamp(difficulty_level, 1, 5)
 		match player_num:
 			"p1":
-				PlayerRepository.add_p1_points(set_bonus)
+				PlayerRepository.add_p1_points(points)
 			"p2":
-				PlayerRepository.add_p2_points(set_bonus)
+				PlayerRepository.add_p2_points(points)
 			"p3":
-				PlayerRepository.add_p3_points(set_bonus)
+				PlayerRepository.add_p3_points(points)
 			"p4":
-				PlayerRepository.add_p4_points(set_bonus)
+				PlayerRepository.add_p4_points(points)
 
 
 func award_mash_points(value: int) -> void:
