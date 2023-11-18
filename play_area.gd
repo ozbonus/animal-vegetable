@@ -9,19 +9,22 @@ enum Difficulty {
 enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN}
 
 
-
+@export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
+@export_category("Debug")
 @export var debug: bool = false
+@export var starting_difficulty := Difficulty.EASY_1 ## Debug only.
 @export var age: int = 10 ## The age of the player. Debug use only here.
+@export_category("Difficulty")
 @export var easy_difficulty_cap: int = 8 ## This age and lower only plays easy.
 @export var medium_difficulty_cap: int = 10 ## This age is limited to medium.
-@export var base_card_points: int = 100 ## Points for one correct answer.
-@export var card_age_bonus: int = 10 ## Bonus per year under 14.
-@export var set_bonus: int = 200 ## Points for a perfect set of answers.
-@export var starting_difficulty := Difficulty.EASY_1 ## Debug only.
 @export_range(1, 10) var difficulty_up_interval: int = 3 ## Harder every n perfect sets.
 @export_range(1, 10) var difficulty_down_interval: int = 1 ## Easier every n botched sets.
-@export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
-@export var mash_interval: int = 3 ## Mash minigame every n perfect sets.
+@export_category("Points")
+@export var base_card_points: int = 100 ## Points for one correct answer.
+@export_range(-1000, 0, 10) var penalty: int = -100 ## Points lost per wrong answer.
+@export var card_age_bonus: int = 10 ## Bonus per year under 14.
+@export var set_bonus: int = 200 ## Points for a perfect set of answers.
+@export var mash_interval: int = 3 ## Mash minigame every n perfect sets. 
 @export var mash_multiplier: int = 10 ## Points awards per point of mash score.
 
 
