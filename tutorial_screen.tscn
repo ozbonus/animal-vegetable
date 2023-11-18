@@ -108,9 +108,6 @@ position = Vector2(210, 635)
 z_index = 10
 position = Vector2(210, 803)
 
-[node name="CongratsSound" type="AudioStreamPlayer2D" parent="P1Area"]
-stream = ExtResource("5_e58qb")
-
 [node name="CongratsAnimation" type="AnimationPlayer" parent="P1Area"]
 root_node = NodePath("../Congrats")
 libraries = {
@@ -126,15 +123,6 @@ position = Vector2(107, 79)
 
 [node name="TargetArrow2" parent="P1Area/TargetArrows" instance=ExtResource("6_ud2an")]
 position = Vector2(107, 246)
-
-[node name="TargetArrow3" parent="P1Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 415)
-
-[node name="TargetArrow4" parent="P1Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 582)
-
-[node name="TargetArrow5" parent="P1Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 750)
 
 [node name="ButtonBox" parent="P1Area" instance=ExtResource("7_uqe22")]
 z_index = 4096
@@ -198,10 +186,6 @@ position = Vector2(765, 635)
 z_index = 10
 position = Vector2(765, 803)
 
-[node name="CongratsSound" type="AudioStreamPlayer2D" parent="P2Area"]
-position = Vector2(555, 0)
-stream = ExtResource("5_e58qb")
-
 [node name="CongratsAnimation" type="AnimationPlayer" parent="P2Area"]
 root_node = NodePath("../Congrats")
 libraries = {
@@ -217,15 +201,6 @@ position = Vector2(107, 79)
 
 [node name="TargetArrow2" parent="P2Area/TargetArrows" instance=ExtResource("6_ud2an")]
 position = Vector2(107, 246)
-
-[node name="TargetArrow3" parent="P2Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 415)
-
-[node name="TargetArrow4" parent="P2Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 582)
-
-[node name="TargetArrow5" parent="P2Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 750)
 
 [node name="ButtonBox" parent="P2Area" instance=ExtResource("7_uqe22")]
 z_index = 4096
@@ -290,10 +265,6 @@ position = Vector2(1280, 635)
 z_index = 10
 position = Vector2(1280, 803)
 
-[node name="CongratsSound" type="AudioStreamPlayer2D" parent="P3Area"]
-position = Vector2(1070, 0)
-stream = ExtResource("5_e58qb")
-
 [node name="CongratsAnimation" type="AnimationPlayer" parent="P3Area"]
 root_node = NodePath("../Congrats")
 libraries = {
@@ -309,15 +280,6 @@ position = Vector2(107, 79)
 
 [node name="TargetArrow2" parent="P3Area/TargetArrows" instance=ExtResource("6_ud2an")]
 position = Vector2(107, 246)
-
-[node name="TargetArrow3" parent="P3Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 415)
-
-[node name="TargetArrow4" parent="P3Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 582)
-
-[node name="TargetArrow5" parent="P3Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 750)
 
 [node name="ButtonBox" parent="P3Area" instance=ExtResource("7_uqe22")]
 z_index = 4096
@@ -382,10 +344,6 @@ position = Vector2(1693, 635)
 z_index = 10
 position = Vector2(1693, 803)
 
-[node name="CongratsSound" type="AudioStreamPlayer2D" parent="P4Area"]
-position = Vector2(1483, 0)
-stream = ExtResource("5_e58qb")
-
 [node name="CongratsAnimation" type="AnimationPlayer" parent="P4Area"]
 root_node = NodePath("../Congrats")
 libraries = {
@@ -401,15 +359,6 @@ position = Vector2(107, 79)
 
 [node name="TargetArrow2" parent="P4Area/TargetArrows" instance=ExtResource("6_ud2an")]
 position = Vector2(107, 246)
-
-[node name="TargetArrow3" parent="P4Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 415)
-
-[node name="TargetArrow4" parent="P4Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 582)
-
-[node name="TargetArrow5" parent="P4Area/TargetArrows" instance=ExtResource("6_ud2an")]
-position = Vector2(107, 750)
 
 [node name="ButtonBox" parent="P4Area" instance=ExtResource("7_uqe22")]
 z_index = 4096
@@ -444,5 +393,9 @@ angular_velocity_min = 53.33
 angular_velocity_max = 93.33
 scale_amount_min = 0.5
 scale_amount_max = 0.5
+
+[node name="CongratsSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(26, 0)
+stream = ExtResource("5_e58qb")
 
 [editable path="P4Area/MashVisuals"]

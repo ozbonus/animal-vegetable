@@ -44,7 +44,7 @@ texture = ExtResource("4_5lqpk")
 
 [node name="Arrow" type="Sprite2D" parent="."]
 position = Vector2(427, 106.333)
-rotation = 1.5708
+rotation = -4.71239
 scale = Vector2(0.104261, 0.104261)
 texture = ExtResource("5_rjcvn")
 offset = Vector2(-206.212, 2.58728)
