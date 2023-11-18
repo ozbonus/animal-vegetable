@@ -1,13 +1,26 @@
-[gd_scene load_steps=23 format=3 uid="uid://dcndxqjr252nt"]
+[gd_scene load_steps=28 format=3 uid="uid://dcndxqjr252nt"]
 
 [ext_resource type="Texture2D" uid="uid://cjmgrrq6gkjw" path="res://art/button_box_left_down.png" id="1_b68ex"]
+[ext_resource type="Shader" path="res://perry_glasses.gdshader" id="2_3r8jb"]
 [ext_resource type="Texture2D" uid="uid://0kvxem62dtpe" path="res://art/button_box_left_up.png" id="2_mu8tu"]
+[ext_resource type="Texture2D" uid="uid://dt7vmx4l46g5" path="res://art/vegetable_tips.png" id="3_m84t1"]
 [ext_resource type="Texture2D" uid="uid://cu5gwgxdo0dui" path="res://art/button_box_right_down.png" id="3_uoquc"]
+[ext_resource type="Texture2D" uid="uid://dtr65r7osan7c" path="res://art/animal_tips.png" id="4_g8r8w"]
 [ext_resource type="Texture2D" uid="uid://bbgda6he4j52s" path="res://art/button_box_right_up.png" id="4_r6jep"]
 [ext_resource type="Script" path="res://button_box.gd" id="5_7qfpd"]
 [ext_resource type="Texture2D" uid="uid://c7kdb80raww0w" path="res://art/computer_cursor_finger_white.png" id="6_kp4yr"]
 [ext_resource type="FontFile" uid="uid://bnbjxfbrglbpl" path="res://font/Grandstander-ExtraBold.ttf" id="7_4bqfv"]
 [ext_resource type="Texture2D" uid="uid://dllrv7i18aq8o" path="res://art/computer_cursor_arrow_white.png" id="8_h7387"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rayt8"]
+shader = ExtResource("2_3r8jb")
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ngui"]
+shader = ExtResource("2_3r8jb")
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = null
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p0dph"]
 animations = [{
@@ -232,6 +245,30 @@ script = ExtResource("5_7qfpd")
 state = 5
 metadata/_edit_horizontal_guides_ = [0.0, 151.0, 34.0]
 
+[node name="LeftArrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-61, -281)
+rotation = 3.14159
+texture = ExtResource("8_h7387")
+
+[node name="RightArrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(58, -281)
+rotation = 3.14159
+texture = ExtResource("8_h7387")
+
+[node name="VegetableTips" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rayt8")
+position = Vector2(62, -60)
+scale = Vector2(0.338867, 0.338867)
+texture = ExtResource("3_m84t1")
+
+[node name="AnimalTips" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_0ngui")
+position = Vector2(-70, -60)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("4_g8r8w")
+
 [node name="Left" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p0dph")
 animation = &"flutter"
@@ -266,6 +303,7 @@ libraries = {
 }
 
 [node name="Minus" type="Label" parent="."]
+visible = false
 offset_left = -115.0
 offset_top = -125.0
 offset_right = -13.0
@@ -275,6 +313,7 @@ label_settings = SubResource("LabelSettings_u64tf")
 metadata/_edit_use_anchors_ = true
 
 [node name="Plus" type="Label" parent="."]
+visible = false
 offset_left = 7.0
 offset_top = -125.0
 offset_right = 123.0
@@ -292,16 +331,6 @@ libraries = {
 libraries = {
 "": SubResource("AnimationLibrary_x4y6k")
 }
-
-[node name="LeftArrow" type="Sprite2D" parent="."]
-position = Vector2(-61, -281)
-rotation = 3.14159
-texture = ExtResource("8_h7387")
-
-[node name="RightArrow" type="Sprite2D" parent="."]
-position = Vector2(58, -281)
-rotation = 3.14159
-texture = ExtResource("8_h7387")
 
 [node name="TutorialAnimation" type="AnimationPlayer" parent="."]
 libraries = {

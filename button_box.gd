@@ -1,7 +1,7 @@
 extends Node
 
 
-enum State {STOP, REACTIVE, MASH, TUTORIAL_LEFT, TUTORIAL_RIGHT, AGE}
+enum State {STOP, REACTIVE, PLAY, MASH, TUTORIAL_LEFT, TUTORIAL_RIGHT, AGE}
 @export var state := State.REACTIVE
 @export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
 @export_range(0.0, 2.0, 0.1) var age_delay: float = 0
@@ -12,6 +12,11 @@ func _ready():
 
 
 func _process(delta):
+	if state != State.PLAY:
+		[$AnimalTips, $VegetableTips].map(func(x): x.hide())
+	else:
+		[$AnimalTips, $VegetableTips].map(func(x): x.show())
+	
 	if state != State.MASH:
 		[$LeftHand, $RightHand].map(func(x): x.hide())
 	else:
@@ -41,6 +46,16 @@ func _process(delta):
 				$Right.play("down")
 			else:
 				$Right.play("up")
+		State.PLAY:
+			if Input.is_action_pressed("%s_left" % player_num):
+				$Left.play("down")
+			else:
+				$Left.play("up")
+			
+			if Input.is_action_pressed("%s_right" % player_num):
+				$Right.play("down")
+			else:
+				$Right.play("up")
 		State.MASH:
 			$Left.play("flutter")
 			$Right.play("flutter")
@@ -48,10 +63,12 @@ func _process(delta):
 			[$Left, $Right].map(func(x): x.play("up"))
 			$TutorialAnimation.play("left")
 			$RightArrow.hide()
+			[$AnimalTips, $VegetableTips].map(func(x): x.show())
 		State.TUTORIAL_RIGHT:
 			[$Left, $Right].map(func(x): x.play("up"))
 			$TutorialAnimation.play("right")
 			$LeftArrow.hide()
+			[$AnimalTips, $VegetableTips].map(func(x): x.show())
 		State.AGE:
 			if !$MinusAnimation.is_playing():
 				$MinusAnimation.play("move")
@@ -71,6 +88,7 @@ func _process(delta):
 
 
 func stop() -> void: state = State.STOP
+func play() -> void: state = State.PLAY
 func tutorial_left() -> void: state = State.TUTORIAL_LEFT
 func tutorial_right() -> void: state = State.TUTORIAL_RIGHT
 func reactive() -> void: state = State.REACTIVE
