@@ -286,7 +286,6 @@ func decrease_difficulty() -> void:
 func _on_card_1_result(value: bool):
 	record.append(value)
 	award_card_points(value)
-	print(value)
 
 
 func _on_card_2_result(value: bool):
