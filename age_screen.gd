@@ -9,6 +9,8 @@ var p4_active: bool = ActivePlayersRepository.p4_active
 
 
 func _ready():
+	MusicService.play_title_music()
+	PlayerRepository.reset_ages()
 	if !p1_active and !debug:
 		$P1Content.queue_free()
 	if !p2_active and !debug:
