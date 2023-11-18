@@ -6,7 +6,7 @@ enum Difficulty {
 	MEDI_1, MEDI_2, MEDI_3, MEDI_4, MEDI_5,
 	HARD_1, HARD_2, HARD_3, HARD_4, HARD_5
 }
-enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN}
+enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN, FLAIL_COOLDOWN}
 
 
 @export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
@@ -19,6 +19,8 @@ enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN}
 @export var medium_difficulty_cap: int = 10 ## This age is limited to medium.
 @export_range(1, 10) var difficulty_up_interval: int = 3 ## Harder every n perfect sets.
 @export_range(1, 10) var difficulty_down_interval: int = 1 ## Easier every n botched sets.
+@export_range(0, 10, 0.1) var flail_cooldown_threshold = 4.0 ## More the n presses per second leads to a cooldown timer.
+@export_range(0, 5, 0.1) var flail_cooldown_length = 3.0 ## Delay card deal for n seconds.
 @export_category("Points")
 @export var base_card_points: int = 100 ## Points for one correct answer.
 @export_range(-1000, 0, 10) var penalty: int = -100 ## Points lost per wrong answer.
@@ -49,6 +51,7 @@ var need_mode_setup = true
 
 
 func _ready():
+	$FlailCooldownTimer.wait_time = flail_cooldown_length
 	mode = Mode.CARD
 	difficulty_level = starting_difficulty
 	if debug:
@@ -74,6 +77,8 @@ func _process(delta):
 		mash_game_loop()
 	if mode == Mode.MASH_COOLDOWN:
 		mash_cooldown_loop()
+	if mode == Mode.FLAIL_COOLDOWN:
+		flail_cooldown_loop()
 
 
 func countdown_loop():
@@ -94,6 +99,8 @@ func card_game_loop() -> void:
 	# Runs when there are no cards or the set of cards is complete.
 	if need_cards:
 		need_cards = false
+		if difficulty_level > Difficulty.EASY_2:
+			$PressesPerSecondTimer.start()
 		match difficulty_level:
 			Difficulty.EASY_1:
 				deal_set(1)
@@ -131,10 +138,12 @@ func card_game_loop() -> void:
 	if Input.is_action_just_pressed("%s_left" % player_num) and target < cards.size():
 		cards[target].answer(Enums.Kind.animal)
 		target += 1
+		$PressesPerSecondTimer.press()
 	
 	if Input.is_action_just_pressed("%s_right" % player_num) and target < cards.size():
 		cards[target].answer(Enums.Kind.vegetable)
 		target += 1
+		$PressesPerSecondTimer.press()
 	
 	# Runs when the set of cards is complete.
 	if target >= cards.size():
@@ -160,6 +169,12 @@ func card_game_loop() -> void:
 		cards.clear()
 		target = 0
 		need_cards = true
+		var need_flail_cooldown: bool = $PressesPerSecondTimer.presses_per_second > flail_cooldown_threshold
+		$PressesPerSecondTimer.stop_and_reset()
+		
+		if need_flail_cooldown:
+			need_mode_setup = true
+			mode = Mode.FLAIL_COOLDOWN
 		
 		if perfect_set_streak % mash_interval == 0 and perfect_set_streak != 0:
 			need_mode_setup = true
@@ -190,6 +205,23 @@ func mash_cooldown_loop() -> void:
 		pass
 	else:
 		$MashCoolDownTimer.start()
+
+
+func flail_cooldown_loop() -> void:
+	if need_mode_setup:
+		print("PUNISH!")
+		$TargetArrows.hide()
+		need_mode_setup = false
+	if $FlailCooldownTimer.time_left > 0:
+		if Input.is_action_just_pressed("%s_left" % player_num):
+			$FlailCooldownTimer.start()
+		
+		if Input.is_action_just_pressed("%s_right" % player_num):
+			$FlailCooldownTimer.start()
+	else:
+		$FlailCooldownTimer.start()
+	
+	
 
 
 func deal_set(count: int, medium := false, difficult := false):
@@ -319,5 +351,10 @@ func _on_mash_visuals_mash_complete(mash_score):
 
 
 func _on_mash_cool_down_timer_timeout():
+	need_mode_setup = true
+	mode = Mode.CARD
+
+
+func _on_flail_cooldown_timer_timeout():
 	need_mode_setup = true
 	mode = Mode.CARD
