@@ -20,6 +20,17 @@ func stop() -> void:
 	timer_on = false
 
 
+func reset() -> void:
+	time = 0
+	presses = 0
+	presses_per_second = 0
+
+
+func reset_and_stop() -> void:
+	stop()
+	reset()
+
+
 func press() -> void:
 	presses += 1
 	presses_per_second = int(presses / time)
