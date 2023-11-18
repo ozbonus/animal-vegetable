@@ -33,4 +33,5 @@ func stop_and_reset() -> void:
 
 func press() -> void:
 	presses += 1
-	presses_per_second = presses / time
+	if time > 0:
+		presses_per_second = presses / time
