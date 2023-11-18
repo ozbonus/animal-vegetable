@@ -4,7 +4,7 @@ extends Node
 var time = 0
 var timer_on = false
 var presses: int = 0
-var presses_per_second: int = 0
+var presses_per_second: float = 0
 
 
 func _process(delta):
@@ -33,4 +33,4 @@ func reset_and_stop() -> void:
 
 func press() -> void:
 	presses += 1
-	presses_per_second = int(presses / time)
+	presses_per_second = presses / time
