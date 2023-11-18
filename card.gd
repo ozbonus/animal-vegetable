@@ -69,6 +69,29 @@ func appear(index: int, medium := false, hard:= true) -> void:
 	$AnimationPlayer.play("appear")
 
 
+func _tutorial(index: int):
+	$Sprite.texture = load(easy_cards[index])
+	show()
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("appear")
+
+
+func show_tutorial_animal_1() -> void:
+	_tutorial(0)
+
+
+func show_tutorial_animal_2() -> void:
+	_tutorial(1)
+
+
+func show_tutorial_vegetable_1() -> void:
+	_tutorial(4)
+
+
+func show_tutorial_vegetable_2() -> void:
+	_tutorial(5)
+
+
 func answer(answer_kind: Enums.Kind) -> void:
 	if answer_kind == card_kind:
 		disappear_correct()
