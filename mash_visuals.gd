@@ -17,7 +17,13 @@ func _ready():
 
 func start_timer():
 	$ArrowAnimator.play("rotate_arrow")
+	$ArrowAnimator.get_animation($ArrowAnimator.current_animation).loop_mode = false
 	$AppearSound.play()
+	
+
+func start_mock_timer() -> void:
+	$ArrowAnimator.play("rotate_arrow")
+	$ArrowAnimator.get_animation($ArrowAnimator.current_animation).loop_mode = true
 
 
 func increase_mash_score() -> void:
@@ -26,11 +32,6 @@ func increase_mash_score() -> void:
 	$AppearSound.play()
 	mash_score += 1
 	$Score/Label.text = str(mash_score)
-	
-
-func set_animation_scale(scale: float):
-	$ArrowAnimator.speed_scale = scale
-
 
 
 func _on_arrow_animator_animation_finished(anim_name):

@@ -30,6 +30,7 @@ texture = ExtResource("4_m8ofs")
 [node name="ButtonBox1" parent="P1Content" instance=ExtResource("9_m26b3")]
 position = Vector2(263, 984)
 scale = Vector2(1.25933, 1.25933)
+state = 6
 age_delay = 0.3
 
 [node name="AgeLabel" parent="P1Content" instance=ExtResource("4_c08h1")]
@@ -46,6 +47,7 @@ texture = ExtResource("6_ykp5n")
 [node name="ButtonBox2" parent="P2Content" instance=ExtResource("9_m26b3")]
 position = Vector2(721, 984)
 scale = Vector2(1.25933, 1.25933)
+state = 6
 player_num = "p2"
 age_delay = 0.2
 metadata/_edit_group_ = true
@@ -64,6 +66,7 @@ texture = ExtResource("7_7k0to")
 [node name="ButtonBox3" parent="P3Content" instance=ExtResource("9_m26b3")]
 position = Vector2(1180, 984)
 scale = Vector2(1.25933, 1.25933)
+state = 6
 player_num = "p3"
 age_delay = 0.1
 
@@ -81,6 +84,7 @@ texture = ExtResource("14_bhgw6")
 [node name="ButtonBox4" parent="P4Content" instance=ExtResource("9_m26b3")]
 position = Vector2(1642, 984)
 scale = Vector2(1.25933, 1.25933)
+state = 6
 player_num = "p4"
 
 [node name="AgeLabel" parent="P4Content" instance=ExtResource("4_c08h1")]

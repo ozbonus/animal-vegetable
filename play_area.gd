@@ -92,7 +92,7 @@ func countdown_loop():
 func card_game_loop() -> void:
 	if need_mode_setup:
 		$MashVisuals.hide()
-		$ButtonBox.reactive()
+		$ButtonBox.play()
 		$TargetArrows.show()
 		need_mode_setup = false
 		

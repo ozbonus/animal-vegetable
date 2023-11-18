@@ -1,23 +1,401 @@
-[gd_scene load_steps=3 format=3 uid="uid://cw854wpt13vbd"]
+[gd_scene load_steps=17 format=3 uid="uid://cw854wpt13vbd"]
 
 [ext_resource type="Script" path="res://tutorial_screen.gd" id="1_136et"]
-[ext_resource type="LabelSettings" uid="uid://bo5wy00ou800" path="res://labels/p1_age.tres" id="2_necmg"]
+[ext_resource type="PackedScene" uid="uid://ckbf8rkan17s7" path="res://attract_background.tscn" id="2_khgn0"]
+[ext_resource type="PackedScene" uid="uid://b5j3xh8o6vjb7" path="res://card.tscn" id="3_d8nce"]
+[ext_resource type="Texture2D" uid="uid://dsrh8hv3p5ynj" path="res://art/banner11.png" id="4_r67if"]
+[ext_resource type="AudioStream" uid="uid://dajbrjqhd4cfq" path="res://audio/Success5.wav" id="5_e58qb"]
+[ext_resource type="PackedScene" uid="uid://8mqeigswc8xo" path="res://target_arrow.tscn" id="6_ud2an"]
+[ext_resource type="PackedScene" uid="uid://dcndxqjr252nt" path="res://button_box.tscn" id="7_uqe22"]
+[ext_resource type="PackedScene" uid="uid://borx3d7ssd3gt" path="res://mash_visuals.tscn" id="8_rmpp7"]
+[ext_resource type="Texture2D" uid="uid://bqtsxypqvqgn7" path="res://art/message_fantastic.png" id="9_ijymv"]
+[ext_resource type="Texture2D" uid="uid://b1n8t1ev6itdl" path="res://art/money_dollar_coin2.png" id="10_2drao"]
+[ext_resource type="Texture2D" uid="uid://di8dp50u5stut" path="res://art/banner05.png" id="11_f1g1s"]
+[ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="12_wu5lp"]
+[ext_resource type="Texture2D" uid="uid://chhkt30l2vt4b" path="res://art/banner06.png" id="13_4rbwr"]
+
+[sub_resource type="Animation" id="Animation_f7cgj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 2.31)]
+}
+
+[sub_resource type="Animation" id="Animation_g6gj7"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2.08165e-12, -127.395)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.525), Vector2(0.6, 1), Vector2(0.6, 0.6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tmucx"]
+_data = {
+"RESET": SubResource("Animation_f7cgj"),
+"show": SubResource("Animation_g6gj7")
+}
 
 [node name="TutorialScreen" type="Node"]
 script = ExtResource("1_136et")
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -820.0
-offset_top = -112.0
-offset_right = 820.0
-offset_bottom = 112.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-text = "Tutorial Screen"
-label_settings = ExtResource("2_necmg")
+[node name="AttractBackground" parent="." instance=ExtResource("2_khgn0")]
+
+[node name="P1Area" type="Node2D" parent="."]
+position = Vector2(26, 0)
+
+[node name="Banner11" type="Sprite2D" parent="P1Area"]
+position = Vector2(210, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("4_r67if")
+
+[node name="Card1" parent="P1Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(210, 131)
+
+[node name="Card2" parent="P1Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(210, 299)
+
+[node name="Card3" parent="P1Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(210, 467)
+
+[node name="Card4" parent="P1Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(210, 635)
+
+[node name="Card5" parent="P1Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(210, 803)
+
+[node name="CongratsAnimation" type="AnimationPlayer" parent="P1Area"]
+root_node = NodePath("../Congrats")
+libraries = {
+"": SubResource("AnimationLibrary_tmucx")
+}
+
+[node name="TargetArrows" type="Node2D" parent="P1Area"]
+z_index = 20
+position = Vector2(0, 2)
+
+[node name="TargetArrow1" parent="P1Area/TargetArrows" instance=ExtResource("6_ud2an")]
+position = Vector2(107, 79)
+
+[node name="TargetArrow2" parent="P1Area/TargetArrows" instance=ExtResource("6_ud2an")]
+position = Vector2(107, 246)
+
+[node name="ButtonBox" parent="P1Area" instance=ExtResource("7_uqe22")]
+z_index = 4096
+position = Vector2(211, 980)
+scale = Vector2(1.21711, 1.21711)
+
+[node name="MashVisuals" parent="P1Area" instance=ExtResource("8_rmpp7")]
+position = Vector2(-40, 278)
+
+[node name="Congrats" type="Sprite2D" parent="P1Area"]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+position = Vector2(211, 739)
+scale = Vector2(1, 2.31)
+texture = ExtResource("9_ijymv")
+
+[node name="MashCoins" type="CPUParticles2D" parent="P1Area"]
+position = Vector2(212, 509)
+emitting = false
+amount = 30
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("10_2drao")
+direction = Vector2(2.08165e-12, -1)
+spread = 103.33
+gravity = Vector2(2.08165e-12, 2700)
+initial_velocity_min = 342.6
+initial_velocity_max = 814.82
+angular_velocity_min = 53.33
+angular_velocity_max = 93.33
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="P2Area" type="Node2D" parent="."]
+position = Vector2(-46, 0)
+
+[node name="Banner11" type="Sprite2D" parent="P2Area"]
+position = Vector2(765, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("11_f1g1s")
+
+[node name="Card1" parent="P2Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(765, 131)
+
+[node name="Card2" parent="P2Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(765, 299)
+
+[node name="Card3" parent="P2Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(765, 467)
+
+[node name="Card4" parent="P2Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(765, 635)
+
+[node name="Card5" parent="P2Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(765, 803)
+
+[node name="CongratsAnimation" type="AnimationPlayer" parent="P2Area"]
+root_node = NodePath("../Congrats")
+libraries = {
+"": SubResource("AnimationLibrary_tmucx")
+}
+
+[node name="TargetArrows" type="Node2D" parent="P2Area"]
+z_index = 20
+position = Vector2(555, 0)
+
+[node name="TargetArrow1" parent="P2Area/TargetArrows" instance=ExtResource("6_ud2an")]
+position = Vector2(107, 79)
+
+[node name="TargetArrow2" parent="P2Area/TargetArrows" instance=ExtResource("6_ud2an")]
+position = Vector2(107, 246)
+
+[node name="ButtonBox" parent="P2Area" instance=ExtResource("7_uqe22")]
+z_index = 4096
+position = Vector2(766, 980)
+scale = Vector2(1.21711, 1.21711)
+player_num = "p2"
+
+[node name="MashVisuals" parent="P2Area" instance=ExtResource("8_rmpp7")]
+position = Vector2(515, 278)
+
+[node name="Congrats" type="Sprite2D" parent="P2Area"]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+position = Vector2(766, 739)
+scale = Vector2(1, 2.31)
+texture = ExtResource("9_ijymv")
+
+[node name="MashCoins" type="CPUParticles2D" parent="P2Area"]
+position = Vector2(767, 509)
+emitting = false
+amount = 30
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("10_2drao")
+direction = Vector2(2.08165e-12, -1)
+spread = 103.33
+gravity = Vector2(2.08165e-12, 2700)
+initial_velocity_min = 342.6
+initial_velocity_max = 814.82
+angular_velocity_min = 53.33
+angular_velocity_max = 93.33
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="P3Area" type="Node2D" parent="."]
+position = Vector2(-72, 0)
+
+[node name="Banner11" type="Sprite2D" parent="P3Area"]
+position = Vector2(1280, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("12_wu5lp")
+
+[node name="Card1" parent="P3Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1280, 131)
+
+[node name="Card2" parent="P3Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1280, 299)
+
+[node name="Card3" parent="P3Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1280, 467)
+
+[node name="Card4" parent="P3Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1280, 635)
+
+[node name="Card5" parent="P3Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1280, 803)
+
+[node name="CongratsAnimation" type="AnimationPlayer" parent="P3Area"]
+root_node = NodePath("../Congrats")
+libraries = {
+"": SubResource("AnimationLibrary_tmucx")
+}
+
+[node name="TargetArrows" type="Node2D" parent="P3Area"]
+z_index = 20
+position = Vector2(1070, 0)
+
+[node name="TargetArrow1" parent="P3Area/TargetArrows" instance=ExtResource("6_ud2an")]
+position = Vector2(107, 79)
+
+[node name="TargetArrow2" parent="P3Area/TargetArrows" instance=ExtResource("6_ud2an")]
+position = Vector2(107, 246)
+
+[node name="ButtonBox" parent="P3Area" instance=ExtResource("7_uqe22")]
+z_index = 4096
+position = Vector2(1281, 980)
+scale = Vector2(1.21711, 1.21711)
+player_num = "p3"
+
+[node name="MashVisuals" parent="P3Area" instance=ExtResource("8_rmpp7")]
+position = Vector2(1030, 278)
+
+[node name="Congrats" type="Sprite2D" parent="P3Area"]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+position = Vector2(1281, 739)
+scale = Vector2(1, 2.31)
+texture = ExtResource("9_ijymv")
+
+[node name="MashCoins" type="CPUParticles2D" parent="P3Area"]
+position = Vector2(1282, 509)
+emitting = false
+amount = 30
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("10_2drao")
+direction = Vector2(2.08165e-12, -1)
+spread = 103.33
+gravity = Vector2(2.08165e-12, 2700)
+initial_velocity_min = 342.6
+initial_velocity_max = 814.82
+angular_velocity_min = 53.33
+angular_velocity_max = 93.33
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="P4Area" type="Node2D" parent="."]
+position = Vector2(-19, 0)
+
+[node name="Banner11" type="Sprite2D" parent="P4Area"]
+position = Vector2(1693, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("13_4rbwr")
+
+[node name="Card1" parent="P4Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1693, 131)
+
+[node name="Card2" parent="P4Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1693, 299)
+
+[node name="Card3" parent="P4Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1693, 467)
+
+[node name="Card4" parent="P4Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1693, 635)
+
+[node name="Card5" parent="P4Area" instance=ExtResource("3_d8nce")]
+z_index = 10
+position = Vector2(1693, 803)
+
+[node name="CongratsAnimation" type="AnimationPlayer" parent="P4Area"]
+root_node = NodePath("../Congrats")
+libraries = {
+"": SubResource("AnimationLibrary_tmucx")
+}
+
+[node name="TargetArrows" type="Node2D" parent="P4Area"]
+z_index = 20
+position = Vector2(1483, 0)
+
+[node name="TargetArrow1" parent="P4Area/TargetArrows" instance=ExtResource("6_ud2an")]
+position = Vector2(107, 79)
+
+[node name="TargetArrow2" parent="P4Area/TargetArrows" instance=ExtResource("6_ud2an")]
+position = Vector2(107, 246)
+
+[node name="ButtonBox" parent="P4Area" instance=ExtResource("7_uqe22")]
+z_index = 4096
+position = Vector2(1694, 980)
+scale = Vector2(1.21711, 1.21711)
+player_num = "p4"
+
+[node name="MashVisuals" parent="P4Area" instance=ExtResource("8_rmpp7")]
+position = Vector2(1443, 278)
+
+[node name="Congrats" type="Sprite2D" parent="P4Area"]
+modulate = Color(1, 1, 1, 0)
+z_index = 30
+position = Vector2(1694, 739)
+scale = Vector2(1, 2.31)
+texture = ExtResource("9_ijymv")
+
+[node name="MashCoins" type="CPUParticles2D" parent="P4Area"]
+position = Vector2(1695, 509)
+emitting = false
+amount = 30
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("10_2drao")
+direction = Vector2(2.08165e-12, -1)
+spread = 103.33
+gravity = Vector2(2.08165e-12, 2700)
+initial_velocity_min = 342.6
+initial_velocity_max = 814.82
+angular_velocity_min = 53.33
+angular_velocity_max = 93.33
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+
+[node name="CongratsSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(26, 0)
+stream = ExtResource("5_e58qb")
+
+[editable path="P4Area/MashVisuals"]
