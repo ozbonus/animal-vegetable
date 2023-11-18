@@ -37,7 +37,7 @@ var p4_active: bool = ActivePlayersRepository.p4_active
 var positions: Array
 var hand: Array
 var cards: Array
-var record: Array
+var record: Array[bool]
 var target: int = 0
 var difficulty_level: Difficulty
 var score: int = 0
@@ -141,11 +141,11 @@ func card_game_loop() -> void:
 		maybe_congratulations()
 		award_set_points()
 		
-		if record.count(0) == 0:
+		if record.count(false) == 0:
 			perfect_set_streak += 1
 		else: perfect_set_streak = 0
 		
-		if record.count(0) > record.count(1):
+		if record.count(false) > record.count(true):
 			failed_set_streak += 1
 		else:
 			failed_set_streak = 0
@@ -206,9 +206,14 @@ func show_target_arrow(index: int):
 	$TargetArrows.get_children()[index].show()
 
 
-func award_card_points(value: int) -> void:
-	var points: int = value * base_card_points
-	var bonus: int = card_age_bonus * (14 - age)
+func award_card_points(correct: bool) -> void:
+
+	var points: int
+	if correct:
+		# 14 is the maximum age that can be entered on the age screen.
+		points = base_card_points + (card_age_bonus * (14 - age))
+	else:
+		points = penalty
 	match player_num:
 		"p1":
 			PlayerRepository.add_p1_points(points)
@@ -218,11 +223,10 @@ func award_card_points(value: int) -> void:
 			PlayerRepository.add_p3_points(points)
 		"p4":
 			PlayerRepository.add_p4_points(points)
-	score += points + bonus
 
 
 func award_set_points() -> void:
-	if record.count(0) == 0:
+	if record.count(false) == 0:
 		match player_num:
 			"p1":
 				PlayerRepository.add_p1_points(set_bonus)
@@ -248,7 +252,7 @@ func award_mash_points(value: int) -> void:
 
 
 func maybe_congratulations() -> void:
-	if record.count(0) == 0:
+	if record.count(false) == 0:
 		var messages: Array[String] = [
 			"res://art/message_fantastic.png",
 			"res://art/message_good_job.png",
@@ -278,27 +282,28 @@ func decrease_difficulty() -> void:
 	difficulty_level = new_difficulty
 
 
-func _on_card_1_result(value: int):
+func _on_card_1_result(value: bool):
+	record.append(value)
+	award_card_points(value)
+	print(value)
+
+
+func _on_card_2_result(value: bool):
 	record.append(value)
 	award_card_points(value)
 
 
-func _on_card_2_result(value: int):
+func _on_card_3_result(value: bool):
 	record.append(value)
 	award_card_points(value)
 
 
-func _on_card_3_result(value: int):
-	record.append(value)
-	award_card_points(value)
-
-
-func _on_card_4_result(value: int):
+func _on_card_4_result(value: bool):
 	record.append(value)
 	award_card_points(value)
 	
 
-func _on_card_5_result(value: int):
+func _on_card_5_result(value: bool):
 	record.append(value)
 	award_card_points(value)
 
