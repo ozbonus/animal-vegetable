@@ -19,6 +19,10 @@ func start_timer():
 	$ArrowAnimator.play("rotate_arrow")
 	$ArrowAnimator.get_animation($ArrowAnimator.current_animation).loop_mode = false
 	$AppearSound.play()
+
+
+func stop_mash():
+	$ArrowAnimator.stop()
 	
 
 func start_mock_timer() -> void:
