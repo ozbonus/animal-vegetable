@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4upxjmundnn3"]
+[gd_scene load_steps=18 format=3 uid="uid://c4upxjmundnn3"]
 
 [ext_resource type="Script" path="res://play_screen.gd" id="1_fi8ra"]
 [ext_resource type="PackedScene" uid="uid://dhqm12i2l1mk3" path="res://play_area.tscn" id="1_ixv42"]
@@ -6,6 +6,119 @@
 [ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="3_4au25"]
 [ext_resource type="Texture2D" uid="uid://chhkt30l2vt4b" path="res://art/banner06.png" id="4_wahlu"]
 [ext_resource type="PackedScene" uid="uid://ckbf8rkan17s7" path="res://attract_background.tscn" id="5_sik6u"]
+[ext_resource type="PackedScene" uid="uid://driah7jii8y61" path="res://game_timer.tscn" id="7_slhhj"]
+[ext_resource type="FontFile" uid="uid://bnbjxfbrglbpl" path="res://font/Grandstander-ExtraBold.ttf" id="8_3ddn0"]
+[ext_resource type="AudioStream" uid="uid://bqq1aglwc5wbi" path="res://audio/218318__splicesound__referee-whistle-blow-gymnasium.wav" id="9_v5hdn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_euckd"]
+font = ExtResource("8_3ddn0")
+font_size = 1000
+outline_size = 48
+outline_color = Color(0.305882, 0, 0.145098, 1)
+
+[sub_resource type="Animation" id="Animation_0rljl"]
+resource_name = "countdown"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountdownLabel/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["3", "2", "1", "Go!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CountdownLabel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.9, 2, 2.1, 2.2, 2.9, 3, 3.1, 3.2, 3.9, 4, 4.1, 4.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1, 1.3), Vector2(1, 0.7), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1.3), Vector2(1, 0.7), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1.3), Vector2(1, 0.7), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_d6nlr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountdownLabel/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["2"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CountdownLabel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mk012"]
+_data = {
+"RESET": SubResource("Animation_d6nlr"),
+"countdown": SubResource("Animation_0rljl")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_7a3wr"]
+font = ExtResource("8_3ddn0")
+font_size = 400
+outline_size = 48
+outline_color = Color(0.305882, 0, 0.145098, 1)
+
+[sub_resource type="Animation" id="Animation_2jdiu"]
+resource_name = "appear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FinishedLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(0.25, 0.25, 0.25, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.5), Vector2(1, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wdgc7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FinishedLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xliu1"]
+_data = {
+"RESET": SubResource("Animation_wdgc7"),
+"appear": SubResource("Animation_2jdiu")
+}
 
 [node name="PlayScreen" type="Node"]
 script = ExtResource("1_fi8ra")
@@ -44,6 +157,71 @@ texture = ExtResource("4_wahlu")
 player_num = "p4"
 
 [node name="AttractBackground" parent="." instance=ExtResource("5_sik6u")]
+
+[node name="GameTimer" parent="." instance=ExtResource("7_slhhj")]
+position = Vector2(852, 5)
+scale = Vector2(0.639858, 0.639858)
+game_length = 40.0
+
+[node name="CountdownLabel" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -788.0
+offset_top = -500.0
+offset_right = 789.0
+offset_bottom = 667.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.3)
+pivot_offset = Vector2(796, 515)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CountdownLabel"]
+layout_mode = 2
+text = "2"
+label_settings = SubResource("LabelSettings_euckd")
+
+[node name="CountdownAnimation" type="AnimationPlayer" parent="."]
+autoplay = "countdown"
+libraries = {
+"": SubResource("AnimationLibrary_mk012")
+}
+
+[node name="FinishedLabel" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -867.0
+offset_top = -528.0
+offset_right = 868.0
+offset_bottom = 639.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(896, 559.615)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="FinishedLabel"]
+layout_mode = 2
+text = "Finished!"
+label_settings = SubResource("LabelSettings_7a3wr")
+
+[node name="FinishedLabelAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xliu1")
+}
+
+[node name="Whistle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_v5hdn")
+
+[connection signal="game_over" from="GameTimer" to="." method="_on_game_timer_game_over"]
+[connection signal="animation_finished" from="CountdownAnimation" to="." method="_on_countdown_animation_animation_finished"]
 
 [editable path="P1PlayArea"]
 [editable path="P1PlayArea/MashVisuals"]

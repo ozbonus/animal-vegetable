@@ -9,7 +9,8 @@ var p4_active: bool = ActivePlayersRepository.p4_active
 
 
 func _ready():
-	MusicService.play_gameplay_music(1.0)
+	MusicService.play_gameplay_music(5.0)
+	$FinishedLabel.hide()
 	PlayerRepository.reset_scores()
 	if !p1_active and !debug:
 		$P1PlayArea.queue_free()
@@ -21,7 +22,6 @@ func _ready():
 		$P4PlayArea.queue_free()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("previous_screen"):
 		ScreenTransition.change_screen("res://tutorial_screen.tscn")
@@ -29,3 +29,16 @@ func _process(delta):
 	if Input.is_action_just_pressed("next_screen"):
 		ScreenTransition.change_screen("res://score_screen.tscn")
 	
+
+func _on_countdown_animation_animation_finished(anim_name):
+	$CountdownLabel.hide()
+	[$P1PlayArea, $P2PlayArea, $P3PlayArea, $P4PlayArea].map(func(x): x.start_game())
+	$GameTimer.start()
+
+
+func _on_game_timer_game_over():
+	[$P1PlayArea, $P2PlayArea, $P3PlayArea, $P4PlayArea].map(func(x): x.finish_game())
+	$FinishedLabel.show()
+	$FinishedLabelAnimation.play("appear")
+	$Whistle.play()
+	MusicService._stop_gameplay_music()

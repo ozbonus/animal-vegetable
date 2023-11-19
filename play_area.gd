@@ -6,12 +6,13 @@ enum Difficulty {
 	MEDI_1, MEDI_2, MEDI_3, MEDI_4, MEDI_5,
 	HARD_1, HARD_2, HARD_3, HARD_4, HARD_5
 }
-enum Mode {COUNTDOWN, CARD, MASH, MASH_COOLDOWN, FLAIL_COOLDOWN}
+enum Mode {WAIT, CARD, MASH, MASH_COOLDOWN, FLAIL_COOLDOWN}
 
 
 @export_enum("p1", "p2", "p3", "p4") var player_num: String = "p1"
 @export_category("Debug")
 @export var debug: bool = false
+@export var debug_mode: Mode
 @export var starting_difficulty := Difficulty.EASY_1 ## Debug only.
 @export_range(5, 14) var age: int = 10 ## The age of the player. Debug use only here.
 @export_category("Difficulty")
@@ -55,8 +56,9 @@ func _ready():
 	mode = Mode.CARD
 	difficulty_level = starting_difficulty
 	if debug:
-		pass
+		mode = debug_mode
 	else:
+		mode = Mode.WAIT
 		match player_num:
 			"p1":
 				age = PlayerRepository.p1_age
@@ -69,8 +71,8 @@ func _ready():
 			
 			
 func _process(delta):
-	if mode == Mode.COUNTDOWN:
-		countdown_loop()
+	if mode == Mode.WAIT:
+		wait_mode()
 	if mode == Mode.CARD:
 		card_game_loop()
 	if mode == Mode.MASH:
@@ -81,12 +83,24 @@ func _process(delta):
 		flail_cooldown_loop()
 
 
-func countdown_loop():
+func wait_mode():
 	$TargetArrows.hide()
-	$ButtonBox.stop()
+	$ButtonBox.play()
 	$MashVisuals.hide()
 	if Input.is_anything_pressed():
 		pass
+
+
+func start_game() -> void:
+	mode = Mode.CARD
+
+
+func finish_game() -> void:
+	mode = Mode.WAIT
+	$ButtonBox.play()
+	$MashVisuals.stop_mash()
+	[$Card1, $Card2, $Card3, $Card4, $Card5].map(func(x): x.hide())
+
 		
 		
 func card_game_loop() -> void:
