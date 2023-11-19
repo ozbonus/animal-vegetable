@@ -122,7 +122,6 @@ _data = {
 
 [node name="PlayScreen" type="Node"]
 script = ExtResource("1_fi8ra")
-debug = true
 
 [node name="P1PlayArea" parent="." instance=ExtResource("1_ixv42")]
 position = Vector2(27, 0)

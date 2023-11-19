@@ -1,16 +1,11 @@
 extends Node
 
 
-enum State {COUNTDOWN, PLAY, FINISHED}
-
-
 @export var debug: bool = false
-@export var debug_state: State
 var p1_active: bool = ActivePlayersRepository.p1_active
 var p2_active: bool = ActivePlayersRepository.p2_active
 var p3_active: bool = ActivePlayersRepository.p3_active
 var p4_active: bool = ActivePlayersRepository.p4_active
-var state: State
 
 
 func _ready():
@@ -25,11 +20,6 @@ func _ready():
 		$P3PlayArea.queue_free()
 	if !p4_active and !debug:
 		$P4PlayArea.queue_free()
-	
-	if debug:
-		state = debug_state
-	else:
-		state = State.COUNTDOWN
 
 
 func _process(delta):
@@ -38,14 +28,6 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("next_screen"):
 		ScreenTransition.change_screen("res://score_screen.tscn")
-	
-	match state:
-		State.COUNTDOWN:
-			pass
-		State.PLAY:
-			pass
-		State.FINISHED:
-			pass
 	
 
 func _on_countdown_animation_animation_finished(anim_name):
