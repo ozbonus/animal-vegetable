@@ -73,7 +73,6 @@ _data = {
 
 [node name="PlayArea" type="Node2D"]
 script = ExtResource("1_vr8wc")
-debug = true
 difficulty_up_interval = 1
 flail_cooldown_threshold = 5.2
 flail_cooldown_length = 1.5

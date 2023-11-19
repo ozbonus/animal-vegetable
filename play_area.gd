@@ -58,7 +58,7 @@ func _ready():
 	if debug:
 		mode = debug_mode
 	else:
-		mode = Mode.CARD
+		mode = Mode.WAIT
 		match player_num:
 			"p1":
 				age = PlayerRepository.p1_age
@@ -85,7 +85,7 @@ func _process(delta):
 
 func wait_mode():
 	$TargetArrows.hide()
-	$ButtonBox.stop()
+	$ButtonBox.play()
 	$MashVisuals.hide()
 	if Input.is_anything_pressed():
 		pass
@@ -97,6 +97,10 @@ func start_game() -> void:
 
 func finish_game() -> void:
 	mode = Mode.WAIT
+	$ButtonBox.play()
+	$MashVisuals.stop_mash()
+	[$Card1, $Card2, $Card3, $Card4, $Card5].map(func(x): x.hide())
+
 		
 		
 func card_game_loop() -> void:
