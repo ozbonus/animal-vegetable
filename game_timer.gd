@@ -20,7 +20,6 @@ func _process(delta):
 		label = new_label
 		$CenterContainer/Label.text = str(label)
 		$AnimationPlayer.play("jiggle")
-		print(new_label)
 
 
 func start() -> void:
