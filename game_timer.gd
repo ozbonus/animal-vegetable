@@ -12,7 +12,6 @@ func _ready():
 	$Timer.wait_time = game_length
 	label = int(game_length)
 	$CenterContainer/Label.text = str(label)
-	start()
 
 
 func _process(delta):
