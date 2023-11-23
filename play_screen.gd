@@ -32,12 +32,12 @@ func _process(delta):
 
 func _on_countdown_animation_animation_finished(anim_name):
 	$CountdownLabel.hide()
-	[$P1PlayArea, $P2PlayArea, $P3PlayArea, $P4PlayArea].map(func(x): x.start_game())
+	[$P1PlayArea, $P2PlayArea, $P3PlayArea, $P4PlayArea].map(func(x): if x: x.start_game())
 	$GameTimer.start()
 
 
 func _on_game_timer_game_over():
-	[$P1PlayArea, $P2PlayArea, $P3PlayArea, $P4PlayArea].map(func(x): x.finish_game())
+	[$P1PlayArea, $P2PlayArea, $P3PlayArea, $P4PlayArea].map(func(x): if x: x.finish_game())
 	$FinishedLabel.show()
 	$FinishedLabelAnimation.play("appear")
 	$Whistle.play()
