@@ -118,13 +118,13 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_u64tf"]
 font = ExtResource("7_4bqfv")
-font_size = 220
+font_size = 120
 outline_size = 36
 outline_color = Color(0.305882, 0, 0.145098, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_16cxu"]
 font = ExtResource("7_4bqfv")
-font_size = 220
+font_size = 120
 outline_size = 36
 outline_color = Color(0.305882, 0, 0.145098, 1)
 
@@ -303,23 +303,23 @@ libraries = {
 }
 
 [node name="Minus" type="Label" parent="."]
-visible = false
 offset_left = -115.0
 offset_top = -125.0
 offset_right = -13.0
 offset_bottom = 99.0
-text = "-"
+text = "-1"
 label_settings = SubResource("LabelSettings_u64tf")
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Plus" type="Label" parent="."]
-visible = false
 offset_left = 7.0
 offset_top = -125.0
 offset_right = 123.0
 offset_bottom = 99.0
-text = "+"
+text = "+1"
 label_settings = SubResource("LabelSettings_16cxu")
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="MinusAnimation" type="AnimationPlayer" parent="."]
