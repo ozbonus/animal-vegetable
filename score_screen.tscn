@@ -1,83 +1,83 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg8ecqvy0av2f"]
+[gd_scene load_steps=7 format=3 uid="uid://cg8ecqvy0av2f"]
 
 [ext_resource type="Script" path="res://score_screen.gd" id="1_ya0yn"]
 [ext_resource type="LabelSettings" uid="uid://bo5wy00ou800" path="res://labels/p1_age.tres" id="2_tyy6m"]
+[ext_resource type="Texture2D" uid="uid://dsrh8hv3p5ynj" path="res://art/banner11.png" id="3_6ifuq"]
+[ext_resource type="Texture2D" uid="uid://di8dp50u5stut" path="res://art/banner05.png" id="4_lbm8t"]
+[ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="5_dp8is"]
+[ext_resource type="Texture2D" uid="uid://chhkt30l2vt4b" path="res://art/banner06.png" id="6_u07tk"]
 
 [node name="ScoreScreen" type="Node"]
 script = ExtResource("1_ya0yn")
+debug = true
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -692.0
-offset_top = 64.0
-offset_right = 692.0
-offset_bottom = 288.0
-grow_horizontal = 2
-text = "Score Screen"
-label_settings = ExtResource("2_tyy6m")
+[node name="P1Area" type="Node2D" parent="."]
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 288.0
-offset_right = 264.0
-offset_bottom = 512.0
-text = "P1"
-label_settings = ExtResource("2_tyy6m")
+[node name="Banner11" type="Sprite2D" parent="P1Area"]
+position = Vector2(252, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("3_6ifuq")
 
-[node name="Label3" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 480.0
-offset_right = 284.0
-offset_bottom = 704.0
-text = "P2"
-label_settings = ExtResource("2_tyy6m")
+[node name="P2Area" type="Node2D" parent="."]
 
-[node name="Label4" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 672.0
-offset_right = 289.0
-offset_bottom = 896.0
-text = "P3"
-label_settings = ExtResource("2_tyy6m")
+[node name="Banner12" type="Sprite2D" parent="P2Area"]
+position = Vector2(711, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("4_lbm8t")
 
-[node name="Label5" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 864.0
-offset_right = 296.0
-offset_bottom = 1088.0
-text = "P4"
-label_settings = ExtResource("2_tyy6m")
+[node name="P3Area" type="Node2D" parent="."]
+
+[node name="Banner13" type="Sprite2D" parent="P3Area"]
+position = Vector2(1179, 584)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("5_dp8is")
+
+[node name="P4Area" type="Node2D" parent="."]
+
+[node name="Banner14" type="Sprite2D" parent="P4Area"]
+position = Vector2(1655, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("6_u07tk")
 
 [node name="P1Points" type="Label" parent="."]
-offset_left = 384.0
-offset_top = 288.0
-offset_right = 696.0
-offset_bottom = 512.0
+offset_left = 96.0
+offset_top = 104.0
+offset_right = 408.0
+offset_bottom = 328.0
 text = "123"
 label_settings = ExtResource("2_tyy6m")
+vertical_alignment = 1
 
 [node name="P2Points" type="Label" parent="."]
-offset_left = 384.0
-offset_top = 480.0
-offset_right = 696.0
-offset_bottom = 704.0
+offset_left = 560.0
+offset_top = 312.0
+offset_right = 872.0
+offset_bottom = 536.0
 text = "123"
 label_settings = ExtResource("2_tyy6m")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="P3Points" type="Label" parent="."]
-offset_left = 384.0
-offset_top = 672.0
-offset_right = 696.0
-offset_bottom = 896.0
+offset_left = 1032.0
+offset_top = 552.0
+offset_right = 1344.0
+offset_bottom = 776.0
 text = "123"
 label_settings = ExtResource("2_tyy6m")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="P4Points" type="Label" parent="."]
-offset_left = 384.0
-offset_top = 864.0
-offset_right = 696.0
-offset_bottom = 1088.0
+offset_left = 1376.0
+offset_top = 800.0
+offset_right = 1688.0
+offset_bottom = 1024.0
 text = "123"
 label_settings = ExtResource("2_tyy6m")
+horizontal_alignment = 2
+vertical_alignment = 1
