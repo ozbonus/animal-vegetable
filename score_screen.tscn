@@ -9,7 +9,6 @@
 
 [node name="ScoreScreen" type="Node"]
 script = ExtResource("1_ya0yn")
-debug = true
 
 [node name="P1Area" type="Node2D" parent="."]
 
@@ -44,40 +43,40 @@ scale = Vector2(1.44475, 1.44475)
 texture = ExtResource("6_u07tk")
 
 [node name="P1Points" type="Label" parent="."]
-offset_left = 96.0
-offset_top = 104.0
-offset_right = 408.0
-offset_bottom = 328.0
-text = "123"
+offset_left = 64.0
+offset_top = 80.0
+offset_right = 633.0
+offset_bottom = 304.0
+text = "10000"
 label_settings = ExtResource("2_tyy6m")
 vertical_alignment = 1
 
 [node name="P2Points" type="Label" parent="."]
-offset_left = 560.0
-offset_top = 312.0
-offset_right = 872.0
-offset_bottom = 536.0
-text = "123"
+offset_left = 432.0
+offset_top = 327.0
+offset_right = 990.0
+offset_bottom = 551.0
+text = "12000"
 label_settings = ExtResource("2_tyy6m")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="P3Points" type="Label" parent="."]
-offset_left = 1032.0
-offset_top = 552.0
-offset_right = 1344.0
-offset_bottom = 776.0
-text = "123"
+offset_left = 904.0
+offset_top = 571.0
+offset_right = 1474.0
+offset_bottom = 795.0
+text = "14000"
 label_settings = ExtResource("2_tyy6m")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="P4Points" type="Label" parent="."]
-offset_left = 1376.0
-offset_top = 800.0
-offset_right = 1688.0
-offset_bottom = 1024.0
-text = "123"
+offset_left = 1256.0
+offset_top = 816.0
+offset_right = 1832.0
+offset_bottom = 1040.0
+text = "16000"
 label_settings = ExtResource("2_tyy6m")
 horizontal_alignment = 2
 vertical_alignment = 1
