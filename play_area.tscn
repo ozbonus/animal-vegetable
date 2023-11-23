@@ -78,7 +78,7 @@ debug = true
 difficulty_up_interval = 1
 flail_cooldown_threshold = 5.2
 flail_cooldown_length = 1.5
-penalty = -50
+penalty = 0
 mash_multiplier = 140
 
 [node name="Banner11" type="Sprite2D" parent="."]
