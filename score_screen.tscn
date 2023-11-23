@@ -86,7 +86,6 @@ _data = {
 
 [node name="ScoreScreen" type="Node"]
 script = ExtResource("1_ya0yn")
-debug = true
 wait_time = 5.0
 metadata/_edit_horizontal_guides_ = [88.0]
 
