@@ -1,83 +1,239 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg8ecqvy0av2f"]
+[gd_scene load_steps=20 format=3 uid="uid://cg8ecqvy0av2f"]
 
 [ext_resource type="Script" path="res://score_screen.gd" id="1_ya0yn"]
-[ext_resource type="LabelSettings" uid="uid://bo5wy00ou800" path="res://labels/p1_age.tres" id="2_tyy6m"]
+[ext_resource type="PackedScene" uid="uid://ctu0fbvqfkcwf" path="res://player_score.tscn" id="3_2up5l"]
+[ext_resource type="Texture2D" uid="uid://dsrh8hv3p5ynj" path="res://art/banner11.png" id="3_6ifuq"]
+[ext_resource type="Animation" uid="uid://bhgnuepj1a6ci" path="res://animation/rise.res" id="4_5raog"]
+[ext_resource type="Texture2D" uid="uid://di8dp50u5stut" path="res://art/banner05.png" id="4_lbm8t"]
+[ext_resource type="Texture2D" uid="uid://cghmhs4n3bhsc" path="res://art/banner13.png" id="5_dp8is"]
+[ext_resource type="Texture2D" uid="uid://chhkt30l2vt4b" path="res://art/banner06.png" id="6_u07tk"]
+[ext_resource type="AudioStream" uid="uid://d4dmo7gnh1o8g" path="res://audio/277019__sandermotions__applause-4.wav" id="8_gjrio"]
+[ext_resource type="Texture2D" uid="uid://b1n8t1ev6itdl" path="res://art/money_dollar_coin2.png" id="9_vvrjt"]
+[ext_resource type="Texture2D" uid="uid://cu8s735e8qjx8" path="res://art/money_dollar_bill1.png" id="10_pmoci"]
+[ext_resource type="PackedScene" uid="uid://ckbf8rkan17s7" path="res://attract_background.tscn" id="11_ombdc"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pqydi"]
+_data = {
+"rise": ExtResource("4_5raog")
+}
+
+[sub_resource type="Animation" id="Animation_kr1em"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_pkpyn"]
+resource_name = "rise"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("P2PlayerScore:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(92, 928), Vector2(92, 88)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v82dl"]
+_data = {
+"RESET": SubResource("Animation_kr1em"),
+"rise": SubResource("Animation_pkpyn")
+}
+
+[sub_resource type="Animation" id="Animation_cnvuf"]
+resource_name = "rise"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("P3PlayerScore:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(572, 928), Vector2(572, 88)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oypfs"]
+_data = {
+"rise": SubResource("Animation_cnvuf")
+}
+
+[sub_resource type="Animation" id="Animation_ysyan"]
+resource_name = "rise"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("P4PlayerScore:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(603, 928), Vector2(603, 88)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qfypr"]
+_data = {
+"rise": SubResource("Animation_ysyan")
+}
 
 [node name="ScoreScreen" type="Node"]
 script = ExtResource("1_ya0yn")
+debug = true
+wait_time = 5.0
+metadata/_edit_horizontal_guides_ = [88.0]
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -692.0
-offset_top = 64.0
-offset_right = 692.0
-offset_bottom = 288.0
-grow_horizontal = 2
-text = "Score Screen"
-label_settings = ExtResource("2_tyy6m")
+[node name="P1Area" type="Node2D" parent="."]
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 288.0
-offset_right = 264.0
-offset_bottom = 512.0
-text = "P1"
-label_settings = ExtResource("2_tyy6m")
+[node name="Banner11" type="Sprite2D" parent="P1Area"]
+position = Vector2(252, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("3_6ifuq")
 
-[node name="Label3" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 480.0
-offset_right = 284.0
-offset_bottom = 704.0
-text = "P2"
-label_settings = ExtResource("2_tyy6m")
+[node name="P1PlayerScore" parent="P1Area" instance=ExtResource("3_2up5l")]
+position = Vector2(92, 928)
+debug = false
 
-[node name="Label4" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 672.0
-offset_right = 289.0
-offset_bottom = 896.0
-text = "P3"
-label_settings = ExtResource("2_tyy6m")
+[node name="Label" parent="P1Area/P1PlayerScore" index="3"]
+horizontal_alignment = 0
 
-[node name="Label5" type="Label" parent="."]
-offset_left = 64.0
-offset_top = 864.0
-offset_right = 296.0
-offset_bottom = 1088.0
-text = "P4"
-label_settings = ExtResource("2_tyy6m")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="P1Area"]
+libraries = {
+"": SubResource("AnimationLibrary_pqydi")
+}
 
-[node name="P1Points" type="Label" parent="."]
-offset_left = 384.0
-offset_top = 288.0
-offset_right = 696.0
-offset_bottom = 512.0
-text = "123"
-label_settings = ExtResource("2_tyy6m")
+[node name="P2Area" type="Node2D" parent="."]
 
-[node name="P2Points" type="Label" parent="."]
-offset_left = 384.0
-offset_top = 480.0
-offset_right = 696.0
-offset_bottom = 704.0
-text = "123"
-label_settings = ExtResource("2_tyy6m")
+[node name="Banner12" type="Sprite2D" parent="P2Area"]
+position = Vector2(711, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("4_lbm8t")
 
-[node name="P3Points" type="Label" parent="."]
-offset_left = 384.0
-offset_top = 672.0
-offset_right = 696.0
-offset_bottom = 896.0
-text = "123"
-label_settings = ExtResource("2_tyy6m")
+[node name="P2PlayerScore" parent="P2Area" instance=ExtResource("3_2up5l")]
+position = Vector2(92, 928)
+debug = false
 
-[node name="P4Points" type="Label" parent="."]
-offset_left = 384.0
-offset_top = 864.0
-offset_right = 696.0
-offset_bottom = 1088.0
-text = "123"
-label_settings = ExtResource("2_tyy6m")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="P2Area"]
+libraries = {
+"": SubResource("AnimationLibrary_v82dl")
+}
+
+[node name="P3Area" type="Node2D" parent="."]
+
+[node name="Banner13" type="Sprite2D" parent="P3Area"]
+position = Vector2(1179, 584)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("5_dp8is")
+
+[node name="P3PlayerScore" parent="P3Area" instance=ExtResource("3_2up5l")]
+position = Vector2(572, 928)
+debug = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="P3Area"]
+libraries = {
+"": SubResource("AnimationLibrary_oypfs")
+}
+
+[node name="P4Area" type="Node2D" parent="."]
+
+[node name="Banner14" type="Sprite2D" parent="P4Area"]
+position = Vector2(1655, 582)
+rotation = -1.57079
+scale = Vector2(1.44475, 1.44475)
+texture = ExtResource("6_u07tk")
+
+[node name="P4PlayerScore" parent="P4Area" instance=ExtResource("3_2up5l")]
+position = Vector2(603, 928)
+debug = false
+
+[node name="Label" parent="P4Area/P4PlayerScore" index="3"]
+size_flags_horizontal = 8
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="P4Area"]
+libraries = {
+"": SubResource("AnimationLibrary_qfypr")
+}
+
+[node name="ApplauseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_gjrio")
+
+[node name="CoinRain" type="CPUParticles2D" parent="."]
+position = Vector2(947, -120)
+amount = 64
+lifetime = 2.0
+texture = ExtResource("9_vvrjt")
+emission_shape = 3
+emission_rect_extents = Vector2(1080, 20)
+direction = Vector2(2.08165e-12, 2.08165e-12)
+spread = 0.0
+gravity = Vector2(2.08165e-12, 1200)
+angular_velocity_min = 15.71
+angular_velocity_max = 125.67
+scale_amount_min = 0.5
+scale_amount_max = 0.7
+
+[node name="CoinRainFront" type="CPUParticles2D" parent="."]
+z_index = 256
+position = Vector2(947, -120)
+lifetime = 2.0
+texture = ExtResource("9_vvrjt")
+emission_shape = 3
+emission_rect_extents = Vector2(1080, 20)
+direction = Vector2(2.08165e-12, 2.08165e-12)
+spread = 0.0
+gravity = Vector2(2.08165e-12, 1200)
+angular_velocity_min = 15.71
+angular_velocity_max = 125.67
+scale_amount_min = 0.5
+scale_amount_max = 0.7
+
+[node name="NoteRain" type="CPUParticles2D" parent="."]
+position = Vector2(947, -120)
+lifetime = 4.0
+texture = ExtResource("10_pmoci")
+emission_shape = 3
+emission_rect_extents = Vector2(1080, 20)
+direction = Vector2(2.08165e-12, 2.08165e-12)
+spread = 0.0
+gravity = Vector2(2.08165e-12, 400)
+angular_velocity_min = -57.6
+angular_velocity_max = 47.13
+scale_amount_min = 0.5
+
+[node name="NoteRainFront" type="CPUParticles2D" parent="."]
+z_index = 256
+position = Vector2(947, -120)
+amount = 4
+lifetime = 4.0
+texture = ExtResource("10_pmoci")
+emission_shape = 3
+emission_rect_extents = Vector2(1080, 20)
+direction = Vector2(2.08165e-12, 2.08165e-12)
+spread = 0.0
+gravity = Vector2(2.08165e-12, 400)
+angular_velocity_min = -57.6
+angular_velocity_max = 47.13
+scale_amount_min = 0.5
+
+[node name="AttractBackground" parent="." instance=ExtResource("11_ombdc")]
+
+[connection signal="finished" from="P1Area/P1PlayerScore" to="." method="_on_p_1_player_score_finished"]
+[connection signal="finished" from="P2Area/P2PlayerScore" to="." method="_on_p_2_player_score_finished"]
+[connection signal="finished" from="P3Area/P3PlayerScore" to="." method="_on_p_3_player_score_finished"]
+[connection signal="finished" from="P4Area/P4PlayerScore" to="." method="_on_p_4_player_score_finished"]
+
+[editable path="P1Area/P1PlayerScore"]
+[editable path="P2Area/P2PlayerScore"]
+[editable path="P4Area/P4PlayerScore"]

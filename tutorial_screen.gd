@@ -5,6 +5,11 @@ enum State {ANIMAL_1, ANIMAL_2, VEG_1, VEG_2, MASH}
 enum Substate {NOT_READY, IN_PROGRESS, FINISHED}
 
 
+
+var p1_active: bool = ActivePlayersRepository.p1_active
+var p2_active: bool = ActivePlayersRepository.p2_active
+var p3_active: bool = ActivePlayersRepository.p3_active
+var p4_active: bool = ActivePlayersRepository.p4_active
 var cards_1: Array[Node]
 var cards_2: Array[Node]
 var cards_3: Array[Node]
@@ -72,6 +77,16 @@ func _ready():
 
 	MusicService.play_title_music()
 	mash_visuals.map(func(x): x.hide())
+	
+	
+	if !p1_active:
+		$P1Area.hide()
+	if !p2_active:
+		$P2Area.hide()
+	if !p3_active:
+		$P3Area.hide()
+	if !p4_active:
+		$P4Area.hide()
 
 
 func _process(delta):
