@@ -99,6 +99,7 @@ func finish_game() -> void:
 	mode = Mode.WAIT
 	$ButtonBox.play()
 	$MashVisuals.stop_mash()
+	$FlailCooldownTimer.stop()
 	[$Card1, $Card2, $Card3, $Card4, $Card5].map(func(x): x.hide())
 
 		
@@ -224,6 +225,7 @@ func mash_cooldown_loop() -> void:
 func flail_cooldown_loop() -> void:
 	if need_mode_setup:
 		print("PUNISH!")
+		$SlowSign.show()
 		$TargetArrows.hide()
 		need_mode_setup = false
 	if $FlailCooldownTimer.time_left > 0:
@@ -370,5 +372,6 @@ func _on_mash_cool_down_timer_timeout():
 
 
 func _on_flail_cooldown_timer_timeout():
+	$SlowSign.hide()
 	need_mode_setup = true
 	mode = Mode.CARD

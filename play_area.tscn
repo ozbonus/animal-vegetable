@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhqm12i2l1mk3"]
+[gd_scene load_steps=15 format=3 uid="uid://dhqm12i2l1mk3"]
 
 [ext_resource type="Script" path="res://play_area.gd" id="1_vr8wc"]
 [ext_resource type="PackedScene" uid="uid://b5j3xh8o6vjb7" path="res://card.tscn" id="2_7a0j3"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://borx3d7ssd3gt" path="res://mash_visuals.tscn" id="7_i7mvp"]
 [ext_resource type="Texture2D" uid="uid://b1n8t1ev6itdl" path="res://art/money_dollar_coin2.png" id="8_esygr"]
 [ext_resource type="PackedScene" uid="uid://bdkbyuvstmsqf" path="res://presses_per_second_timer.tscn" id="10_bnfm6"]
+[ext_resource type="PackedScene" uid="uid://byk4x02kf0qku" path="res://slow_sign.tscn" id="11_426ln"]
 
 [sub_resource type="Animation" id="Animation_f7cgj"]
 length = 0.001
@@ -173,6 +174,10 @@ one_shot = true
 
 [node name="FlailCooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="SlowSign" parent="." instance=ExtResource("11_426ln")]
+visible = false
+position = Vector2(39, 278)
 
 [connection signal="result" from="Card1" to="." method="_on_card_1_result"]
 [connection signal="result" from="Card2" to="." method="_on_card_2_result"]

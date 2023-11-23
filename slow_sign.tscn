@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://byk4x02kf0qku"]
+
+[ext_resource type="Shader" path="res://perry_glasses.gdshader" id="1_184lj"]
+[ext_resource type="Texture2D" uid="uid://bgybvesj675ud" path="res://art/slow_sign.png" id="2_amphk"]
+[ext_resource type="FontFile" uid="uid://bnbjxfbrglbpl" path="res://font/Grandstander-ExtraBold.ttf" id="3_u7txw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u1xpm"]
+shader = ExtResource("1_184lj")
+shader_parameter/outline_width = 2.0
+shader_parameter/outline_color = null
+
+[sub_resource type="LabelSettings" id="LabelSettings_vng6v"]
+font = ExtResource("3_u7txw")
+font_size = 125
+outline_size = 48
+outline_color = Color(0.305882, 0, 0.145098, 1)
+
+[node name="SlowSign" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_u1xpm")
+texture = ExtResource("2_amphk")
+centered = false
+
+[node name="Label2" type="Label" parent="Sprite2D"]
+offset_left = -43.0
+offset_top = 274.0
+offset_right = 388.0
+offset_bottom = 457.0
+text = "SLOW"
+label_settings = SubResource("LabelSettings_vng6v")
+horizontal_alignment = 1
+vertical_alignment = 1
