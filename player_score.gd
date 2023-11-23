@@ -14,9 +14,10 @@ var tick: int = 1
 
 
 func _ready():
+	$Label.text = "$0"
+	
 	if debug:
 		start(wait_time, 20000)
-	print($Timer.wait_time)
 
 
 func _process(delta):
@@ -48,5 +49,7 @@ func num_separator(number:int) -> String:
 
 func _on_timer_timeout():
 	$Label.text = "$%s" % num_separator(int(score))
-	$Starburst.emitting = true
-	$Starburst.restart()
+	[$Starburst1, $Starburst2, $Starburst3].map(func(x): x.emitting = true)
+	[$Starburst1, $Starburst2, $Starburst3].map(func(x): x.restart())
+	$FinishedSound.play()
+	finished.emit()
