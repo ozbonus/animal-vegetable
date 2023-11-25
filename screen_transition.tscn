@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dvg143ng18e2m"]
 
-[ext_resource type="Texture2D" uid="uid://b0057kjw74g1r" path="res://art/transition_icon.png" id="1_1vjc3"]
 [ext_resource type="Script" path="res://screen_transition.gd" id="1_h8qes"]
+[ext_resource type="Texture2D" uid="uid://ct5jkjcp4hffe" path="res://art/CYLE Shield Low.jpeg" id="2_11c1g"]
 
 [sub_resource type="Animation" id="Animation_y3niy"]
 resource_name = "RESET"
@@ -261,8 +261,7 @@ polygon = PackedVector2Array(1952, 48, 1952, 112, 2000, 80)
 
 [node name="TransitionIcon" type="Sprite2D" parent="."]
 position = Vector2(-1301, 540)
-scale = Vector2(2, 2)
-texture = ExtResource("1_1vjc3")
+texture = ExtResource("2_11c1g")
 
 [node name="ScreenTransitionAnimation" type="AnimationPlayer" parent="."]
 libraries = {

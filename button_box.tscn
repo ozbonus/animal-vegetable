@@ -242,7 +242,6 @@ _data = {
 [node name="ButtonBox" type="CanvasGroup"]
 position = Vector2(187, 125)
 script = ExtResource("5_7qfpd")
-state = 5
 metadata/_edit_horizontal_guides_ = [0.0, 151.0, 34.0]
 
 [node name="LeftArrow" type="Sprite2D" parent="."]
