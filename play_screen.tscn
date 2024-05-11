@@ -186,10 +186,10 @@ text = "2"
 label_settings = SubResource("LabelSettings_euckd")
 
 [node name="CountdownAnimation" type="AnimationPlayer" parent="."]
-autoplay = "countdown"
 libraries = {
 "": SubResource("AnimationLibrary_mk012")
 }
+autoplay = "countdown"
 
 [node name="FinishedLabel" type="CenterContainer" parent="."]
 anchors_preset = 8

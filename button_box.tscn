@@ -297,10 +297,10 @@ texture = ExtResource("6_kp4yr")
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "mash"
 libraries = {
 "": SubResource("AnimationLibrary_2tu48")
 }
+autoplay = "mash"
 
 [node name="Minus" type="Label" parent="."]
 offset_left = -115.0
